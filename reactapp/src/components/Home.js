@@ -3,7 +3,9 @@ import React from 'react';
 
 const Home = () => {
     return (
-            <h1 style={{ textAlign:'left',border: 'solid',color : 'green',textDecorationColor:'black'}}>Home</h1>
+        <header>
+            <h1 style={{ textAlign: 'left', border: ' 1px solid rgba(0, 0, 0, 0.05)', color: '#000', textDecorationColor: 'black' }}>Home</h1>
+        </header>
     );
 
 
