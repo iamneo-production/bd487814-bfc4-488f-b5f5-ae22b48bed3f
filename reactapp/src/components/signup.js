@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link} from "react-router-dom";
 
-function Register() {
+function Signup() {
     const [showpasswordtype, setpasswordtype] = useState("password");
     const [userName, setUserName] = useState('');
     const [userlastname, setlastname] = useState('');
@@ -32,7 +32,7 @@ function Register() {
     return (
         <>
             <center>
-                <h5> Register</h5>
+                <h5> signup</h5>
                 <form onSubmit={handleSubmit}>
                     First Name : <input type="text" placeholder="Enter Name" name="name" onChange={e => setUserName(e.target.value)} /><br /><br />
                     Last Name : <input type="text" placeholder="Enter your last namer" name="lastname" onChange={e => setlastname(e.target.value)} /><br /><br />
@@ -48,12 +48,12 @@ function Register() {
                         }
                     }} />Show Password
                     <br /><br />
-                    <button  type="button" ><a class="forgot" href="Home"> Submit</a></button>
+                    <button  type="button" ><a class="forgot" href="image"> Submit</a></button>
                 </form>
-                <Link to="/Login">Login</Link>
+                <Link to="/login">Login</Link>
             </center>
         </>
     );
 }
 
-export default Register;
+export default Signup;

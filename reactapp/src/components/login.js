@@ -3,7 +3,7 @@ import {Navigate} from "react-router-dom";
 
 
 
-const Login = () => {
+const login = () => {
   const handle = (e) => {
     return <Navigate to="/Home"></Navigate>
   }
@@ -17,12 +17,12 @@ const Login = () => {
           <input type="text" title="username" placeholder="username" /><br /><br />
           <input type="password" title="username" placeholder="password" /><br /><br />
           <button type="submit" onClick={handle}>Login</button><br /><br />
-          <a class="forgot" href="Register">Forgot Username?</a><br /><br />
-          <a class="forgot" href="Register">Register</a>
+          <a class="forgot" href="signup">Forgot Username?</a><br /><br />
+          <a class="forgot" href="signup">Register</a>
         </form>
       </center>
     </div>
   );
 }
 
-export default Login;
+export default login;
