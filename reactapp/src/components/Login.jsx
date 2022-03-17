@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 //Frombox to style the form
 const Formbox = styled.div`
   width: 350px;
-  max-height: 400px;
+  max-height: 420px;
   min-width: 500px;
   display: flex;
   flex-direction: column;

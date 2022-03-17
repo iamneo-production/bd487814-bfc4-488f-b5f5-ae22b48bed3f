@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 //Frombox to style the form
 const Formbox = styled.div`
   width: 350px;
-  max-height: auto;
+  max-height: 600px;
   min-width: 500px;
   display: flex;
   flex-direction: column;
