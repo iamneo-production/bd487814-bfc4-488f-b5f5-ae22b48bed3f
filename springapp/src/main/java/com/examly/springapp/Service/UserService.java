@@ -1,5 +1,9 @@
 package com.examly.springapp.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.examly.springapp.Repository.UserRepository;
 import com.examly.springapp.Model.*;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
@@ -48,10 +53,10 @@ public class UserService {
 		}
 	}
 	
-	public boolean newUserSignUp(UserModel user) {
+	public boolean saveUser(UserModel user) { // REMOVED UNIQUE USERNAME
 		for(UserModel i:userRepo.findAll())
 		{
-			if((i.getEmail().equals(user.getEmail())) || (i.getUsername().equals(user.getUsername())) || (user.getUsername().equals("admin")) || (user.getEmail().equals("admin")))
+			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin")))
 			{
 				return false;
 			}
@@ -59,14 +64,20 @@ public class UserService {
 		
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setActive(false);
-		user.setRole("USER");
+		
+		if(user.getRole()==null)
+		{
+			user.setRole("USER");
+		}
+		
+		
 		userRepo.save(user);
 		
 		return true;
 		
 	}
 	
-	public boolean UserLogin(LoginModel data) {
+	public boolean checkUser(LoginModel data) {
 		for(UserModel i:userRepo.findAll())
 		{
 			if((i.getEmail().equals(data.getEmail())) && (passwordEncoder.matches(data.getPassword(),i.getPassword())))
@@ -78,5 +89,46 @@ public class UserService {
 		return false;
 		
 	}
+	
+	public List<UserModel> getUser() {
+		List<UserModel> users=new ArrayList<>();
+		
+		for(UserModel i:userRepo.findAll())
+		{
+			users.add(i);
+		}
+		
+		return users;
+	}
+	
+	public UserModel userEditData(String id) {
+		return userRepo.findByEmail(id);
+	}
+	
+	public void userDelete(String id) {
+		userRepo.delete(userRepo.findByEmail(id));
+	}
+	
+	public void userEditSave(UserModel user) {
+		/*for(UserModel i:userRepo.findAll())
+		{
+			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin")))
+			{
+				
+			}
+		}
+		
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setActive(false);
+		
+		if(user.getRole()==null)
+		{
+			user.setRole("USER");
+		}*/
+		
+		
+		userRepo.save(user);
+	}
+	
 
 }
