@@ -25,7 +25,7 @@ public class SignupController {
 	@RequestMapping(value="/signup",method=RequestMethod.POST,consumes="application/json",produces="application/json")
 	@CrossOrigin(origins = "http://localhost:8081")
 	public ResponseEntity<Object> saveUser(@RequestBody UserModel user){
-		if(userService.newUserSignUp(user))
+		if(userService.saveUser(user))
 		{
             return new ResponseEntity<>(true,HttpStatus.OK);
 		}

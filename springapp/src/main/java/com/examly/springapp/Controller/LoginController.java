@@ -22,7 +22,7 @@ public class LoginController {
 	@RequestMapping(value="/login",method=RequestMethod.POST,consumes="application/json",produces="application/json")
 	@CrossOrigin(origins = "http://localhost:8081")
 	public ResponseEntity<Object> checkUser(@RequestBody LoginModel data){
-		if(userService.UserLogin(data))
+		if(userService.checkUser(data))
 		{
             return new ResponseEntity<>(true,HttpStatus.OK);
 		}
