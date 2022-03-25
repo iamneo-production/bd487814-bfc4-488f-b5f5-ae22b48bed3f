@@ -64,8 +64,8 @@ export default function Image() {
                     </Link>
                 </div>
             </div>
-            {/* Suggestion's
-            <Suggestionlist /> */}
+            "Suggestion's"
+            <Suggestionlist />
             <hr></hr>
             
 
