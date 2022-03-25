@@ -67,44 +67,7 @@ export default function Image() {
             {/* Suggestion's
             <Suggestionlist /> */}
             <hr></hr>
-            <body>
-          
-          <div className="container mainbox">
-            <div className="row box1">
-              <div className="col-md-1 imgcol">
-                <img className="userimage" src="{userimg}" />
-              </div>
-              <div className="col-md-10 usernamecol">
-                <h3>user_name</h3>
-              </div>
-              <div className="col-md-1 dotescol">
-               <Doticon className="dotesicon"/>
-              </div>
-              <div className="col-md-12 userpost">
-                <img className='image' src={post1} height="100%" width="1140px"  />
-              </div>
-              <div className="col-md-0 like userfeed">
-                <Likeicon className="likeicon"/>
-              </div>
-              <div className="col-md-3 like userfeed">
-                <h5>Likes</h5>
-              </div>
-              <div className="col-md-0 comments userfeed">
-                <Commenticon className="commenticon"/>
-              </div>
-              <div className="col-md-3 like userfeed">
-                <h5>comments</h5>
-              </div>
-              <div className="col-md-0 comments userfeed">
-                <Shareicon className="commenticon"/>
-              </div>
-              <div className="col-md-3 like userfeed">
-                <h5>share</h5>
-              </div>
-              
-            </div>
-          </div>
-        </body>
+            
 
         </div>
         
