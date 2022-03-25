@@ -4,10 +4,12 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
-
+import { DarkModeContextProvider } from "./components/admin/darkmode/DarkModeContext"
 ReactDOM.render(
   <React.StrictMode>
+    <DarkModeContextProvider>
     <App />
+    </DarkModeContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

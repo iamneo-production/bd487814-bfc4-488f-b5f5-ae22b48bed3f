@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import bgImg from "../images/backgroundimg.jpg";
 import styled from "styled-components";
@@ -48,72 +48,161 @@ const Formlogo = styled.div`
   justify-content: center;
 `;
 
-function Signup(props) {
-  const [userFirstname, setFirstname] = useState("");
-  const [userLastname, setLastname] = useState("");
-  const [userid, setuserid] = useState("");
-  const [email, setemail] = useState("");
-  const [mobileNumber, setmobileNumber] = useState("");
-  const [password, setpassword] = useState("");
+export class Signup extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userFirstname: "",
+      userLastname: "",
+      userid: "",
+      password: "",
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (mobileNumber.length != 10) {
-      alert("Ivalid Phone number");
-    }
+  userFirstnamehandler = (event) => {
+    this.setState({
+      userFirstname: event.target.value,
+    });
   };
 
-  const notify = () => toast.success("Registered successfully!");
+  userLastnamehandler = (event) => {
+    this.setState({
+      userLastname: event.target.value,
+    });
+  };
 
-  return (
-    <div id={props.id}>
-      <Container>
-        <Formbox className="scrollbar scrollbar-juicy-peach">
-          <Formlogo>
-            <img
-              src={require("../images/PhotoFramed-logos_black.png")}
-              alt="Logo"
-              border-radius={100}
-              width={70}
-              height={70}
-            />
-          </Formlogo>
-          <Form>
-            <h1 className="text-center">Register</h1>
-            <FormGroup>
-              <Label>First Name</Label>
-              <Input
-                type="text"
-                id="userFirstname"
-                placeholder="Enter First name"
-                value={userFirstname}
-                onChange={(e) => setFirstname(e.target.value)}
-                required
+  useridhandler = (event) => {
+    this.setState({
+      userid: event.target.value,
+    });
+  };
+
+  passwordhandler = (event) => {
+    this.setState({
+      password: event.target.value,
+    });
+  };
+
+  //Notification for signup
+  notify = (e) => toast(e);
+
+  handleSubmit = (event) => {
+    if (this.state.password.toString().length <= 8) {
+      alert(`Password must contain atleast 8 characters.`);
+    } else if (
+      this.state.password.search(/[0-9]/) === -1 ||
+      this.state.password.search(/[a-z]/) === -1 ||
+      this.state.password.search(/[A-Z]/) === -1 ||
+      this.state.password.search(
+        /[!\@\#\$\^\&\*\(\)\+\=\-\/\?\.\,\>\<\}\{\]\[\'\"\;\:\]\}\{\`\~]/
+      ) === -1
+    ) {
+      alert(
+        `Password must contain atleast 1 number, 1 Uppercase, 1 Lowercase and 1 Special character.`
+      );
+    } else {
+      console.log(this.state);
+      const user = {
+        userFirstname: this.state.userFirstname,
+        userLastname: this.state.userLastname,
+        userid: this.state.userid,
+        password: this.state.password,
+      };
+      this.notify("Registered Successfully!");
+    }
+    event.preventDefault();
+  };
+  // const loginApi = () => {
+  //   fetch("http://localhost:3000/", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       firstname: userFirstname,
+  //       lastname: userLastname,
+  //       email: email,
+  //       password: password,
+  //       mobileNumber: mobileNumber,
+  //       userid: userid,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.status === "success") {
+  //         toast.success("Signup Successful");
+  //         props.history.push("/login");
+  //       } else {
+  //         toast.error("Signup Failed");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  // fetch("https://api.example.com/items")
+  //     .then(res => res.json())
+  //     .then(
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (mobileNumber.length != 10) {
+  //     alert("Ivalid Phone number");
+  //   }
+  // };
+  // const notify = () => toast.success("Registered successfully!");
+
+  render() {
+    return (
+      <div id="signupBox">
+        <Container>
+          <Formbox className="scrollbar scrollbar-juicy-peach">
+            <Formlogo>
+              <img
+                src={require("../images/PhotoFramed-logos_black.png")}
+                alt="Logo"
+                border-radius={100}
+                width={70}
+                height={70}
               />
-            </FormGroup>
-            <FormGroup>
-              <Label>Last Name</Label>
-              <Input
-                type="text"
-                id="userLastname"
-                placeholder="Enter Last name"
-                value={userLastname}
-                onChange={(e) => setLastname(e.target.value)}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>User ID</Label>
-              <Input
-                type="text"
-                id="userid"
-                placeholder="Enter username"
-                value={userid}
-                onChange={(e) => setuserid(e.target.value)}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
+            </Formlogo>
+            <Form className="signup-form" onSubmit={this.handleSubmit}>
+              <h1 className="text-center">Register</h1>
+              <FormGroup>
+                <Label>First Name</Label>
+                <Input
+                  type="text"
+                  id="userFirstname"
+                  placeholder="Enter First name"
+                  value={this.state.userFirstname}
+                  onChange={this.userFirstnamehandler}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Last Name</Label>
+                <Input
+                  type="text"
+                  id="userLastname"
+                  placeholder="Enter Last name"
+                  value={this.state.userLastname}
+                  onChange={this.userLastnamehandler}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>User ID</Label>
+                <Input
+                  type="text"
+                  id="userid"
+                  placeholder="Enter username"
+                  value={this.state.userid}
+                  onChange={this.useridhandler}
+                  required
+                />
+              </FormGroup>
+              {/* <FormGroup>
               <Label>Email ID</Label>
               <Input
                 type="email"
@@ -134,35 +223,34 @@ function Signup(props) {
                 onChange={(e) => setmobileNumber(e.target.value)}
                 required
               />
-            </FormGroup>
-            <FormGroup>
-              <Label>Password</Label>
-              <Input
-                type="password"
-                id="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                required
-              />
-            </FormGroup>
-            <Button
-              className="btn-lg btn-dark btn-block"
-              id="submitButton"
-              onClick={notify}
-            >
-              Register
-            </Button>
-            <div className="text-center">
-              {/* <a href="/signup">Existing user? Sign in</a> */}
-              <Link to="/login">Existing user? Sign in</Link>
-            </div>
-          </Form>
-        </Formbox>
-      </Container>
-      <ToastContainer autoClose={2000} />
-    </div>
-  );
+            </FormGroup> */}
+              <FormGroup>
+                <Label>Password</Label>
+                <Input
+                  type="password"
+                  id="password"
+                  placeholder="Enter password"
+                  value={this.state.password}
+                  onChange={this.passwordhandler}
+                  required
+                />
+              </FormGroup>
+              <Button
+                className="btn-lg btn-dark btn-block"
+                id="submitButton"
+                type="submit"
+              >
+                Register
+              </Button>
+              <div className="text-center">
+                {/* <a href="/signup">Existing user? Sign in</a> */}
+                <Link to="/login">Existing user? Sign in</Link>
+              </div>
+            </Form>
+          </Formbox>
+        </Container>
+        <ToastContainer autoClose={2000} />
+      </div>
+    );
+  }
 }
-
-export default Signup;
