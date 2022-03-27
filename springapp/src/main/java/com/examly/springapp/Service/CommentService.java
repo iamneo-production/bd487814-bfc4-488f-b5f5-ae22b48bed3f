@@ -1,5 +1,6 @@
 package com.examly.springapp.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.examly.springapp.Model.CommentModel;
 import com.examly.springapp.Model.ImageModel;
+import com.examly.springapp.Model.UserModel;
 import com.examly.springapp.Repository.CommentRepository;
 import com.examly.springapp.Repository.ImageRepository;
 
@@ -42,6 +44,17 @@ public class CommentService {
 		commentNew.setComment(comment.getComment());
 		
 		commentRepo.save(commentNew);
+	}
+	
+	public List<CommentModel> getAllComments() {
+		List<CommentModel> comments = new ArrayList<>();
+		
+		for(CommentModel i:commentRepo.findAll())
+		{
+			comments.add(new CommentModel(i.getCommentId(),i.getComment(),new UserModel(i.getUserId().getEmail())));
+		}
+		
+		return comments;
 	}
 
 }
