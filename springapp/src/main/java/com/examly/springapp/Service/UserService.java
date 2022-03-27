@@ -26,7 +26,7 @@ public class UserService {
 	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	@PostConstruct
-	public void addAdmin() {
+	public void addAdmin() { // IF THE USER ADMIN DOESN'T EXISTS IN THE DATABASE THEN IT WOULD BE AUTOMATICALLY ADDED
 		int flag=0;
 		
 		for(UserModel i:userRepo.findAll())
@@ -53,10 +53,10 @@ public class UserService {
 		}
 	}
 	
-	public boolean saveUser(UserModel user) { // REMOVED UNIQUE USERNAME
+	public boolean saveUser(UserModel user) { 
 		for(UserModel i:userRepo.findAll())
 		{
-			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin")))
+			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin")) || (i.getUsername().equals(user.getUsername()))) // CHECKS WHETHER THE EMAIL AND USERNAME ALREADY EXISTS OR NOT
 			{
 				return false;
 			}
@@ -127,6 +127,10 @@ public class UserService {
 		}*/
 		
 		
+		userRepo.save(user);
+	}
+
+	public void userEdit(UserModel user) {
 		userRepo.save(user);
 	}
 	

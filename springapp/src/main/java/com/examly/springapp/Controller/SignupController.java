@@ -22,7 +22,7 @@ public class SignupController {
 	private UserService userService;
 	
 	
-	@RequestMapping(value="/signup",method=RequestMethod.POST,consumes="application/json",produces="application/json")
+	@RequestMapping(value="/signup",method=RequestMethod.POST) // USE TO STORE A NEW USER IN THE DATABASE
 	@CrossOrigin(origins = "http://localhost:8081")
 	public ResponseEntity<Object> saveUser(@RequestBody UserModel user){
 		if(userService.saveUser(user))

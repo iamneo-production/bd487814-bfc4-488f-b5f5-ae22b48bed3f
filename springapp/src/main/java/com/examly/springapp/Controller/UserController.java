@@ -21,23 +21,29 @@ public class UserController {
 	private UserService userService;
 	
 	
-	@RequestMapping(value="/admin",method=RequestMethod.GET,consumes="application/json",produces="application/json")
+	@RequestMapping(value="/admin",method=RequestMethod.GET) // RETRIEVES ALL AVAILABLE USERS
 	@CrossOrigin(origins = "http://localhost:8081")
 	public List<UserModel> getUser() {
 		return userService.getUser();
 	}
 	
 	
-	@RequestMapping(value="/admin/delete/{id}",method=RequestMethod.DELETE,consumes="application/json",produces="application/json")
+	@RequestMapping(value="/admin/delete/{id}",method=RequestMethod.DELETE) // DELETES A USER - ID
 	@CrossOrigin(origins = "http://localhost:8081")
-	public void userDelete(@PathVariable String id) { // SHOULD'NT RETURN ANYTHING
+	public void userDelete(@PathVariable String id) { 
 		userService.userDelete(id);
 	}
 	
-	@RequestMapping(value="/admin/add",method=RequestMethod.POST,consumes="application/json",produces="application/json")
+	@RequestMapping(value="/admin/add",method=RequestMethod.POST) // ADMIN HAS THE PRIVILGE TO ADD NEW USER
 	@CrossOrigin(origins = "http://localhost:8081")
-	public void userEditSave(@RequestBody UserModel user) { // SHOULD'NT RETURN ANYTHING
+	public void userEditSave(@RequestBody UserModel user) {
 		userService.userEditSave(user);
+	}
+	
+	@RequestMapping(value="/admin/userEdit/{id}",method=RequestMethod.PUT)
+	@CrossOrigin(origins = "http://localhost:8081")
+	public void userEdit(@RequestBody UserModel user,@PathVariable String id) { // ADMIN HAS THE PRIVILGE TO EDIT USER DETAILS
+		userService.userEdit(user);
 	}
 	
 }

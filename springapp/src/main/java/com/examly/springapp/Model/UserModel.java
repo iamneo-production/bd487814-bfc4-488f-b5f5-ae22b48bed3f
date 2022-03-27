@@ -5,6 +5,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.persistence.Id;
 
 @Entity
@@ -12,16 +15,19 @@ import javax.persistence.Id;
 public class UserModel {
 	
 	 	@Id
+	 	//@Email
 	    @Column(name="email",unique=true)
 	    private String email;
 
 	    @Column(name="password")
 	    private String password;
 
-	    @Column(name="username")
+	    @Column(name="username",unique=true)
 	    private String username;
 
 	    @Column(name="mobileNumber")
+	    //@Size(min=10,max=10)
+		//@Pattern(regexp = "(^$|[0-9]{10})")
 	    private String mobileNumber;
 
 	    @Column(name="active")
@@ -34,7 +40,7 @@ public class UserModel {
 	    	
 	    }
 
-		UserModel(String email, String password, String username, String mobileNumber, boolean active,
+		public UserModel(String email, String password, String username, String mobileNumber, boolean active,
 				String role) {
 			super();
 			this.email = email;
@@ -45,12 +51,26 @@ public class UserModel {
 			this.role = role;
 		}
 		
-		UserModel(String email, String password, String username, String mobileNumber) {
+		public UserModel(String email, String password, String username, String mobileNumber) {
 			super();
 			this.email = email;
 			this.password = password;
 			this.username = username;
 			this.mobileNumber = mobileNumber;
+		}
+		
+		public UserModel(String email, String password, String username, String mobileNumber, String role) {
+			super();
+			this.email = email;
+			this.password = password;
+			this.username = username;
+			this.mobileNumber = mobileNumber;
+			this.role = role;
+		}
+		
+		public UserModel(String email) {
+			super();
+			this.email = email;
 		}
 
 		public String getEmail() {
