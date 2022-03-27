@@ -19,9 +19,9 @@ public class LoginController {
 	private UserService userService;
 	
 	
-	@RequestMapping(value="/login",method=RequestMethod.POST,consumes="application/json",produces="application/json")
+	@RequestMapping(value="/login",method=RequestMethod.POST) // CHECKS WHETHER THE USERNAME AND PASSWORD MATCHES OR NOT
 	@CrossOrigin(origins = "http://localhost:8081")
-	public ResponseEntity<Object> checkUser(@RequestBody LoginModel data){
+	public ResponseEntity<Object> checkUser(@RequestBody LoginModel data){ 
 		if(userService.checkUser(data))
 		{
             return new ResponseEntity<>(true,HttpStatus.OK);

@@ -10,7 +10,7 @@ import com.examly.springapp.Model.UserModel;
 public interface UserRepository extends JpaRepository<UserModel,Long> {
 	@Query("SELECT u FROM UserModel u where u.username=?1")
 	public UserModel findByUserName(String username);
-
+	
 	@Query("SELECT u FROM UserModel u where u.email=?1")
 	public UserModel findByEmail(String email);
 }
