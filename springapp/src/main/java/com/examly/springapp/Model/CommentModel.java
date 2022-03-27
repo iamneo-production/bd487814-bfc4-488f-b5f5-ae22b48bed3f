@@ -42,6 +42,13 @@ public class CommentModel {
 		this.userId = userId;
 	}
 	
+	public CommentModel(String commentId, String comment, UserModel userId) {
+		super();
+		this.commentId = commentId;
+		this.comment = comment;
+		this.userId = userId;
+	}
+	
 	public String getCommentId() {
 		return commentId;
 	}
