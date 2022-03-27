@@ -1,5 +1,7 @@
 package com.examly.springapp.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,12 @@ public class CommentController {
 	@CrossOrigin(origins = "http://localhost:8081")
 	public void updateComment(@RequestBody CommentModel comment, @PathVariable String id){
 		commentService.updateComment(comment, id);
+	}
+	
+	@RequestMapping(value="/admin/comment",method=RequestMethod.GET) // RETRIEVES ALL COMMENTS
+	@CrossOrigin(origins = "http://localhost:8081")
+	public List<CommentModel> getAllComments(){
+		return commentService.getAllComments();
 	}
 
 }
