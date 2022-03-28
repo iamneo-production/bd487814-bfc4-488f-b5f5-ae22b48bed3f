@@ -73,7 +73,16 @@ export class Login extends Component {
   notify = (e) => toast(e);
 
   handleSubmit = (event) => {
-    if (this.state.password.toString().length <= 8) {
+if((this.state.username==="admin") && (this.state.password.toString()==="admin")){
+  //this.toast.success("Logged in Successfully as admin!");
+  console.log("Hello mawa");
+      const user = {
+        username: this.state.username,
+        password: this.state.password,
+      };
+  
+}
+      else if (this.state.password.toString().length <= 8) {
       alert(`Password must contain atleast 8 characters.`);
     } else if (
       this.state.password.search(/[0-9]/) === -1 ||

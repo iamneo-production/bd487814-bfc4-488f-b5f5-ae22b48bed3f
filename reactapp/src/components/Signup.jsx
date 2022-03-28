@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import bgImg from "../images/backgroundimg.jpg";
 import styled from "styled-components";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import "./scrollbar.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+
+
+
 //Frombox to style the form
 const Formbox = styled.div`
   width: 350px;
@@ -60,6 +63,11 @@ export class Signup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  adminnavigate = (e) => {
+    let navigate = useNavigate();
+    navigate("/admin"); 
+  }
+
   userFirstnamehandler = (event) => {
     this.setState({
       userFirstname: event.target.value,
@@ -88,6 +96,11 @@ export class Signup extends Component {
   notify = (e) => toast(e);
 
   handleSubmit = (event) => {
+    return <Navigate to="/login" />
+    event.preventDefault();
+    //this.adminnavigate();
+
+    
     let auth=false;
     if (this.state.password.toString().length <= 8) {
       alert(`Password must contain atleast 8 characters.`);
@@ -104,20 +117,22 @@ export class Signup extends Component {
       );
     } else {
       console.log(this.state);
+      
       const user = {
         userFirstname: this.state.userFirstname,
         userLastname: this.state.userLastname,
         userid: this.state.userid,
         password: this.state.password,
+        
       };
-      axios.post("http://localhost:8081/signup", user).then((res) => {
-        this.notify("Registered Successfully!");
-        // res =>{auth=true}
-        this.if(res)
-        {
-          return <Navigate to="/login" />
-        }
-      });
+      // axios.post("http://localhost:8081/signup", user).then((res) => {
+      //   this.notify("Registered Successfully!");
+      //   // res =>{auth=true}
+      //   this.if(res)
+      //   {
+      //     return <Navigate to="/login" />
+      //   }
+      // });
     }
     event.preventDefault();
   };
