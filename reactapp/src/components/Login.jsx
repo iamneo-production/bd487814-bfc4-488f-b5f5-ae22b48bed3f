@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import bgImg from "../images/backgroundimg.jpg";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link,Navigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-//import axios from "axios";
+import axios from "axios";
 
 //Frombox to style the form
 const Formbox = styled.div`
@@ -92,7 +92,13 @@ export class Login extends Component {
         username: this.state.username,
         password: this.state.password,
       };
-      this.notify("Login Successfull!");
+      axios.post("http://localhost:8081/login", user).then((res) => {
+        this.notify("Logged in Successfully!");
+        this.if(res)
+        {
+          return <Navigate to="/home" />
+        }
+      });
     }
 
     event.preventDefault();

@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import bgImg from "../images/backgroundimg.jpg";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./scrollbar.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-
+import axios from "axios";
 //Frombox to style the form
 const Formbox = styled.div`
   width: 350px;
@@ -88,6 +88,7 @@ export class Signup extends Component {
   notify = (e) => toast(e);
 
   handleSubmit = (event) => {
+    let auth=false;
     if (this.state.password.toString().length <= 8) {
       alert(`Password must contain atleast 8 characters.`);
     } else if (
@@ -109,10 +110,21 @@ export class Signup extends Component {
         userid: this.state.userid,
         password: this.state.password,
       };
-      this.notify("Registered Successfully!");
+      axios.post("http://localhost:8081/signup", user).then((res) => {
+        this.notify("Registered Successfully!");
+        // res =>{auth=true}
+        this.if(res)
+        {
+          return <Navigate to="/login" />
+        }
+      });
     }
     event.preventDefault();
   };
+
+  // if(auth){
+  //   return <Navigate to="/login" />
+  // }
   // const loginApi = () => {
   //   fetch("http://localhost:3000/", {
   //     method: "POST",
