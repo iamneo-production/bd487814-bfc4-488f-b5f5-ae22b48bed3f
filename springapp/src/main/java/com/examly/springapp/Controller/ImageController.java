@@ -82,17 +82,18 @@ public class ImageController {
 			
 		}
 		
-		catch (SerialException e) {
-			e.printStackTrace();
+		catch (Exception e) {
+			System.out.println("ENCOUNTERED AN EXCEPTION");
+			//e.printStackTrace();
 		}
 		
-		catch (SQLException e) {
+		/*catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 	
@@ -117,7 +118,8 @@ public class ImageController {
 		}
 		
 		catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("ENCOUNTERED AN EXCEPTION");
+			//e.printStackTrace();
 		}
 		
 		return null;
@@ -128,6 +130,13 @@ public class ImageController {
 	@CrossOrigin(origins = "http://localhost:8081")
 	public List<ImageModel> getImages() {
 		return imgService.getImages();
+		
+	}
+	
+	@RequestMapping(value="/user/{id}",method=RequestMethod.GET) // USED TO DISPLAY IMAGE ID, USERMODEL, COMMENTS OF POST BY PARTICULAR USER
+	@CrossOrigin(origins = "http://localhost:8081")
+	public List<ImageModel> getImagesByUser(@PathVariable String id) {
+		return imgService.getImagesByUser(id);
 		
 	}
 }

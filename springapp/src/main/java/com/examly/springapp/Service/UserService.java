@@ -57,7 +57,7 @@ public class UserService {
 	public boolean saveUser(UserModel user) { 
 		for(UserModel i:userRepo.findAll())
 		{
-			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin")) || (i.getUsername().equals(user.getUsername()))) // CHECKS WHETHER THE EMAIL AND USERNAME ALREADY EXISTS OR NOT
+			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin"))) // CHECKS WHETHER THE EMAIL AND USERNAME ALREADY EXISTS OR NOT
 			{
 				return false;
 			}
@@ -89,6 +89,10 @@ public class UserService {
 		
 		return false;
 		
+	}
+	
+	public String getUserRole(LoginModel data) {
+		return userRepo.findByEmail(data.getEmail()).getRole();
 	}
 	
 	public List<UserModel> getUser() {
@@ -126,6 +130,19 @@ public class UserService {
 		{
 			user.setRole("USER");
 		}*/
+		
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		
+		if(user.getRole().toLowerCase().equals("user"))
+		{
+			user.setRole("ROLE_USER");
+		}
+		else if(user.getRole().toLowerCase().equals("admin"))
+		{
+			user.setRole("ROLE_ADMIN");
+		}
+		
+		user.setActive(false);
 		
 		
 		userRepo.save(user);
