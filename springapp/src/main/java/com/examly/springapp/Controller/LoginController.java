@@ -1,6 +1,7 @@
 package com.examly.springapp.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +18,6 @@ import com.examly.springapp.Model.*;
 import com.examly.springapp.Repository.UserRepository;
 import com.examly.springapp.Security.JwtUtil;
 import com.examly.springapp.Service.*;
-
 
 @RestController
 public class LoginController {
@@ -36,7 +36,7 @@ public class LoginController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST) // CHECKS WHETHER THE USERNAME AND PASSWORD MATCHES OR NOT
 	@CrossOrigin(origins = "http://localhost:8081")
-	public ResponseEntity<Object> checkUser(@RequestBody LoginModel data){ 
+	public ResponseEntity<?> checkUser(@RequestBody LoginModel data){ 
 		/*try {
 			authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword())
@@ -63,13 +63,13 @@ public class LoginController {
 			
 			final String jwt = jwtTokenUtil.generateToken(userDetails);
 			
-			System.out.println(jwt);
+			//System.out.println(jwt);
 			
-            return new ResponseEntity<>(true,HttpStatus.OK);
+            return new ResponseEntity<>(new LoginResponseModel(true,jwt,userService.getUserRole(data)),HttpStatus.OK);
 		}
 		else
 		{
-			return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new LoginResponseModel(false),HttpStatus.BAD_REQUEST);
 		}
 	}
 }

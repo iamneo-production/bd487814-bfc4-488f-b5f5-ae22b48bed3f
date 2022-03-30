@@ -100,4 +100,38 @@ public class ImageService {
 		return images;
 	}
 	
+	
+	public List<ImageModel> getImagesByUser(String email) { 
+		List<ImageModel> images=new ArrayList<>();
+		
+		for(ImageModel i:imageRepo.findAll())
+		{
+			if(i.getUserId().getEmail().equals(email))
+			{
+				int j;
+				
+				List<CommentModel> temp=i.getComments();
+				List<CommentModel> tempNew=new ArrayList<>();
+				
+				for(j=0;j<temp.size();j++)
+				{
+					CommentModel temp1 = new CommentModel();
+					
+					temp1.setCommentId(commentRepo.findById(temp.get(j).getCommentId()).get().getCommentId());
+					temp1.setComment(commentRepo.findById(temp.get(j).getCommentId()).get().getComment());
+					temp1.setUserId(new UserModel(commentRepo.findById(temp.get(j).getCommentId()).get().getUserId().getEmail()));
+	
+					tempNew.add(temp1);
+					
+				}
+				
+				
+				
+				images.add(new ImageModel(i.getImageId(),i.getImageName(),i.getImageTag(),new UserModel(i.getUserId().getEmail()),tempNew));
+			
+			}
+		}
+		
+		return images;
+	}
 }

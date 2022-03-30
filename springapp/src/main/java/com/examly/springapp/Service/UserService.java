@@ -14,6 +14,7 @@ import com.examly.springapp.Repository.UserRepository;
 import com.examly.springapp.Model.*;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
@@ -44,7 +45,7 @@ public class UserService {
 			
 			user.setEmail("admin");
 			user.setUsername("admin");
-			user.setRole("ADMIN");
+			user.setRole("ROLE_ADMIN");
 			user.setActive(false);
 			user.setPassword(passwordEncoder.encode("admin"));
 			
@@ -56,7 +57,7 @@ public class UserService {
 	public boolean saveUser(UserModel user) { 
 		for(UserModel i:userRepo.findAll())
 		{
-			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin")) || (i.getUsername().equals(user.getUsername()))) // CHECKS WHETHER THE EMAIL AND USERNAME ALREADY EXISTS OR NOT
+			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin"))) // CHECKS WHETHER THE EMAIL AND USERNAME ALREADY EXISTS OR NOT
 			{
 				return false;
 			}
@@ -67,7 +68,7 @@ public class UserService {
 		
 		if(user.getRole()==null)
 		{
-			user.setRole("USER");
+			user.setRole("ROLE_USER");
 		}
 		
 		
@@ -88,6 +89,10 @@ public class UserService {
 		
 		return false;
 		
+	}
+	
+	public String getUserRole(LoginModel data) {
+		return userRepo.findByEmail(data.getEmail()).getRole();
 	}
 	
 	public List<UserModel> getUser() {
@@ -126,6 +131,19 @@ public class UserService {
 			user.setRole("USER");
 		}*/
 		
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		
+		if(user.getRole().toLowerCase().equals("user"))
+		{
+			user.setRole("ROLE_USER");
+		}
+		else if(user.getRole().toLowerCase().equals("admin"))
+		{
+			user.setRole("ROLE_ADMIN");
+		}
+		
+		user.setActive(false);
+		
 		
 		userRepo.save(user);
 	}
@@ -133,6 +151,5 @@ public class UserService {
 	public void userEdit(UserModel user) {
 		userRepo.save(user);
 	}
-	
 
 }
