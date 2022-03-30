@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { confirm } from "react-confirm-box";
-import "./css/Profile.css";
+
 
 
 export default function Image() {
