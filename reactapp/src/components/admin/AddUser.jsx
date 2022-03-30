@@ -1,56 +1,41 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./darkmode/dark.scss";
+import "./AddUser.css";
 import Navbar from "./Navbar";
-export default function NewUser() {
-    return (
-      <div className="newUser">
-        <h1 className="newUserTitle">New User</h1>
-        <form className="newUserForm">
-          <div className="newUserItem">
-            <label>Username</label>
-            <input type="text" placeholder="john" />
-          </div>
-          <div className="newUserItem">
-            <label>Full Name</label>
-            <input type="text" placeholder="John Smith" />
-          </div>
-          <div className="newUserItem">
-            <label>Email</label>
-            <input type="email" placeholder="john@gmail.com" />
-          </div>
-          <div className="newUserItem">
-            <label>Password</label>
-            <input type="password" placeholder="password" />
-          </div>
-          <div className="newUserItem">
-            <label>Phone</label>
-            <input type="text" placeholder="+1 123 456 78" />
-          </div>
-          <div className="newUserItem">
-            <label>Address</label>
-            <input type="text" placeholder="New York | USA" />
-          </div>
-          <div className="newUserItem">
-            <label>Gender</label>
-            <div className="newUserGender">
-              <input type="radio" name="gender" id="male" value="male" />
-              <label for="male">Male</label>
-              <input type="radio" name="gender" id="female" value="female" />
-              <label for="female">Female</label>
-              <input type="radio" name="gender" id="other" value="other" />
-              <label for="other">Other</label>
-            </div>
-          </div>
-          <div className="newUserItem">
-            <label>Active</label>
-            <select className="newUserSelect" name="active" id="active">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-          <button className="newUserButton">Create</button>
-        </form>
-      </div>
-    );
-  }
+import { DarkModeContext } from "./darkmode/DarkModeContext";
+
+export default function AddUser() {
+  const { darkMode } = useContext(DarkModeContext);
+  return (
+    <div className={darkMode ? "app dark" : "app"}>
+      <Navbar />
+    <div className="newUser" style={{ height: 669 }}>
+      <h1 className="newUserTitle">Add New User</h1>
+      <form className="newUserForm">
+        <div className="newUserItem">
+          <label>Username</label>
+          <input type="text" placeholder="Enter Your Username" id="username"/>
+        </div>
+        <div className="newUserItem">
+          <label>Email</label>
+          <input type="email" placeholder="Enter Your Email ID" id="email"/>
+        </div>
+        <div className="newUserItem">
+          <label>Password</label>
+          <input type="password" placeholder="Enter Your Password" id="password" />
+        </div>
+        <div className="newUserItem">
+          <label>Phone</label>
+          <input type="text" placeholder="Enter Your Phone Number" id="mobileNumber"/>
+        </div>
+        <div className="newUserItem">
+          <label>Address</label>
+          <input type="text" placeholder="Enter Your Address" />
+        </div>          
+        <button className="newUserButton">Create</button>
+      </form>
+    </div>
+    </div>
+  );
+}

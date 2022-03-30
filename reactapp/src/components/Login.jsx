@@ -106,9 +106,9 @@ const Login = () => {
 
     console.log(data);
     axios.post("http://localhost:8081/login", data).then((res) => {
-      if (res.status) {
+      if (res.data.status) {
         saveresp(res);
-        if (res.role === "ROLE_ADMIN") {
+        if (res.data.role === "ROLE_ADMIN") {
           setAuthadmin(true);
         } else {
           setAuthuser(true);

@@ -52,13 +52,13 @@ const Formlogo = styled.div`
 const Signup = () => {
   const notify = (e) => toast(e);
   const [data, setData] = useState({
-    userFirstname: "",
-    userLastname: "",
-    userid: "",
+    email: "",
+    mobileNumber: "",
+    username: "",
     password: "",
   });
 
-  const { userFirstname, userLastname, userid, password } = data;
+  const { email, mobileNumber, username, password } = data;
   const [valid, setValid] = useState(false);
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -91,7 +91,7 @@ const Signup = () => {
     // }
     console.log(data);
     axios.post("http://localhost:8081/signup", data).then((res) => {
-      if (res.status) {
+      if (res.data.status) {
         setValid(true);
       }
       else
@@ -121,37 +121,37 @@ const Signup = () => {
           <Form className="signup-form" onSubmit={submitHandler}>
             <h1 className="text-center">Register</h1>
             <FormGroup>
-              <Label>First Name</Label>
+              <Label>Email</Label>
               <Input
                 type="text"
-                id="userFirstname"
-                name="userFirstname"
-                placeholder="Enter First name"
-                value={userFirstname}
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                value={email}
                 onChange={changeHandler}
                 required
               />
             </FormGroup>
             <FormGroup>
-              <Label>Last Name</Label>
+              <Label>Mobile Number</Label>
               <Input
                 type="text"
-                id="userLastname"
-                name="userLastname"
-                placeholder="Enter Last name"
-                value={userLastname}
+                id="mobileNumber"
+                name="mobileNumber"
+                placeholder="Enter Mobile Number"
+                value={mobileNumber}
                 onChange={changeHandler}
                 required
               />
             </FormGroup>
             <FormGroup>
-              <Label>User ID</Label>
+              <Label>User name</Label>
               <Input
                 type="text"
-                id="userid"
-                name="userid"
+                id="username"
+                name="username"
                 placeholder="Enter username"
-                value={userid}
+                value={username}
                 onChange={changeHandler}
                 required
               />
