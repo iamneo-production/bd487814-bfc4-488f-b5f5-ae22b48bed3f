@@ -63,10 +63,10 @@ export class Signup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  adminnavigate = (e) => {
-    let navigate = useNavigate();
-    navigate("/admin"); 
-  }
+  // adminnavigate = (e) => {
+  //   let navigate = useNavigate();
+  //   navigate("/admin"); 
+  // }
 
   userFirstnamehandler = (event) => {
     this.setState({
@@ -96,8 +96,8 @@ export class Signup extends Component {
   notify = (e) => toast(e);
 
   handleSubmit = (event) => {
-    return <Navigate to="/login" />
-    event.preventDefault();
+    // <Link to="/admin "></Link>
+    // event.preventDefault();
     //this.adminnavigate();
 
     
@@ -125,14 +125,14 @@ export class Signup extends Component {
         password: this.state.password,
         
       };
-      // axios.post("http://localhost:8081/signup", user).then((res) => {
-      //   this.notify("Registered Successfully!");
-      //   // res =>{auth=true}
-      //   this.if(res)
-      //   {
-      //     return <Navigate to="/login" />
-      //   }
-      // });
+      axios.post("http://localhost:8081/signup", user).then((res) => {
+        this.notify("Registered Successfully!");
+        // res =>{auth=true}
+        this.if(res)
+        {
+          return <Link to="/login" />
+        }
+      });
     }
     event.preventDefault();
   };

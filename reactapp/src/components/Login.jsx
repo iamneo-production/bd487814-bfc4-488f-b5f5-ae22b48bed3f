@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import bgImg from "../images/backgroundimg.jpg";
 import styled from "styled-components";
-import { Link,Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
@@ -47,48 +47,43 @@ const Formlogo = styled.div`
   justify-content: center;
 `;
 
-export class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      username: "",
-      password: "",
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  usernamehandler = (event) => {
-    this.setState({
-      username: event.target.value,
-    });
-  };
-
-  passwordhandler = (event) => {
-    this.setState({
-      password: event.target.value,
-    });
-  };
-
-  //Notification for login
-  notify = (e) => toast(e);
-
-  handleSubmit = (event) => {
-if((this.state.username==="admin") && (this.state.password.toString()==="admin")){
-  //this.toast.success("Logged in Successfully as admin!");
-  console.log("Hello mawa");
-      const user = {
-        username: this.state.username,
-        password: this.state.password,
-      };
-  
+//Save the token from the response
+export function saveresp(data) {
+  localStorage.setItem("token", JSON.stringify(data.token));
 }
-      else if (this.state.password.toString().length <= 8) {
+
+const Login = () => {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = data;
+  const [authadmin, setAuthadmin] = useState(false);
+  const [authuser, setAuthuser] = useState(false);
+
+  const changeHandler = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (password.toString() === "admin" && email.toString() === "admin") {
+      console.log(data);
+      axios.post("http://localhost:8081/login", data).then((res) => {
+        if (res.status) {
+          setAuthadmin(true);
+          notify("Logged in as Admin");
+        }
+      });
+    } else if (password.toString().length <= 8) {
       alert(`Password must contain atleast 8 characters.`);
     } else if (
-      this.state.password.search(/[0-9]/) === -1 ||
-      this.state.password.search(/[a-z]/) === -1 ||
-      this.state.password.search(/[A-Z]/) === -1 ||
-      this.state.password.search(
+      password.search(/[0-9]/) === -1 ||
+      password.search(/[a-z]/) === -1 ||
+      password.search(/[A-Z]/) === -1 ||
+      //eslint-disable-next-line
+      password.search(
         /[!\@\#\$\^\&\*\(\)\+\=\-\/\?\.\,\>\<\}\{\]\[\'\"\;\:\]\}\{\`\~]/
       ) === -1
     ) {
@@ -96,35 +91,32 @@ if((this.state.username==="admin") && (this.state.password.toString()==="admin")
         `Password must contain atleast 1 number, 1 Uppercase, 1 Lowercase and 1 Special character.`
       );
     } else {
-      console.log(this.state);
-      const user = {
-        username: this.state.username,
-        password: this.state.password,
-      };
-      axios.post("http://localhost:8081/login", user).then((res) => {
-        this.notify("Logged in Successfully!");
-        this.if(res)
-        {
-          return <Navigate to="/home" />
+      console.log(data);
+      axios.post("http://localhost:8081/login", data).then((res) => {
+        if (res.status) {
+          setAuthuser(true);
+          saveresp(res);
+          notify("Logged in as User");
+        } else {
+          notify("Invalid Credentials");
         }
       });
     }
-
-    event.preventDefault();
-
-    // axios
-    //   .post("http://localhost:8081/", user)
-    //   .then((response) => {
-    //     console.log(response);
-    //     // this.setState({userId:response.data.userId})
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
-  render() {
-    return (
+  const notify = (e) => toast(e);
+
+  if (authadmin) {
+    notify("Logged in as Admin");
+
+    return <Navigate to="/admin" />;
+  }
+  if (authuser) {
+    return <Navigate to="/home" />;
+  }
+
+  return (
+    <>
       <div id="loginBox">
         <Container>
           <Formbox>
@@ -137,16 +129,17 @@ if((this.state.username==="admin") && (this.state.password.toString()==="admin")
                 height={70}
               />
             </Formlogo>
-            <Form className="login-form" onSubmit={this.handleSubmit}>
+            <Form className="login-form" onSubmit={submitHandler}>
               <h1 className="text-center">Login</h1>
               <FormGroup>
                 <Label>Username</Label>
                 <Input
                   type="String"
-                  id="username"
-                  placeholder="Enter username"
-                  value={this.state.username}
-                  onChange={this.usernamehandler}
+                  id="email"
+                  name="email"
+                  placeholder="Enter email"
+                  value={email}
+                  onChange={changeHandler}
                   required
                 />
               </FormGroup>
@@ -155,9 +148,10 @@ if((this.state.username==="admin") && (this.state.password.toString()==="admin")
                 <Input
                   type="password"
                   id="password"
+                  name="password"
                   placeholder="Enter password"
-                  value={this.state.password}
-                  onChange={this.passwordhandler}
+                  value={password}
+                  onChange={changeHandler}
                   required
                 />
               </FormGroup>
@@ -165,7 +159,7 @@ if((this.state.username==="admin") && (this.state.password.toString()==="admin")
                 className="btn-lg btn-dark btn-block"
                 type="submit"
                 id="loginButton"
-                // onClick={this.notify}
+                //onClick={notify("error")}
               >
                 Login
               </Button>
@@ -179,6 +173,8 @@ if((this.state.username==="admin") && (this.state.password.toString()==="admin")
         </Container>
         <ToastContainer autoClose={2000} />
       </div>
-    );
-  }
-}
+    </>
+  );
+};
+
+export default Login;
