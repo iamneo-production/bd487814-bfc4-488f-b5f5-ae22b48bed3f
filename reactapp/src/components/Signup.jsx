@@ -1,0 +1,205 @@
+import React, { useState } from "react";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import bgImg from "../images/backgroundimg.jpg";
+import styled from "styled-components";
+import { Link, Navigate } from "react-router-dom";
+import "./scrollbar.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+
+//Frombox to style the form
+const Formbox = styled.div`
+  width: 350px;
+  max-height: 600px;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 15px;
+  margin: auto;
+  height: 80%;
+  top: 100px;
+  text-align: left;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0 10px;
+  position: relative;
+  overflow-y: scroll;
+  font-family: Fredoka;
+  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.8);
+  scrollbar-width: 0px;
+`;
+
+// Container to style and hold Form and logo
+const Container = styled.div`
+  background-image: url(${bgImg});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+`;
+
+//Formlogo for Logo style in the form
+const Formlogo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Signup = () => {
+  const [data, setData] = useState({
+    userFirstname: "",
+    userLastname: "",
+    userid: "",
+    password: "",
+  });
+
+  const { userFirstname, userLastname, userid, password } = data;
+  const [valid, setValid] = useState(false);
+  const changeHandler = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (password.toString().length <= 8) {
+      alert(`Password must contain atleast 8 characters.`);
+    } else if (
+      password.search(/[0-9]/) === -1 ||
+      password.search(/[a-z]/) === -1 ||
+      password.search(/[A-Z]/) === -1 ||
+      //eslint-disable-next-line
+      password.search(
+        /[!\@\#\$\^\&\*\(\)\+\=\-\/\?\.\,\>\<\}\{\]\[\'\"\;\:\]\}\{\`\~]/
+      ) === -1
+    ) {
+      alert(
+        `Password must contain atleast 1 number, 1 Uppercase, 1 Lowercase and 1 Special character.`
+      );
+    } else {
+      console.log(data);
+      axios.post("http://localhost:8081/signup", data).then((res) => {
+        notify("Registered Successfully!");
+        // res =>{auth=true}
+        if (res) {
+          setValid(true);
+        }
+      });
+    }
+  };
+
+  if (valid) {
+    return <Navigate to="/login" />;
+  } else {
+    notify("Unsuccessful registration!");
+  }
+
+  const notify = (e) => toast(e);
+  return (
+    <div id="signupBox">
+      <Container>
+        <Formbox className="scrollbar scrollbar-juicy-peach">
+          <Formlogo>
+            <img
+              src={require("../images/PhotoFramed-logos_black.png")}
+              alt="Logo"
+              border-radius={100}
+              width={70}
+              height={70}
+            />
+          </Formlogo>
+          <Form className="signup-form" onSubmit={submitHandler}>
+            <h1 className="text-center">Register</h1>
+            <FormGroup>
+              <Label>First Name</Label>
+              <Input
+                type="text"
+                id="userFirstname"
+                name="userFirstname"
+                placeholder="Enter First name"
+                value={userFirstname}
+                onChange={changeHandler}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Last Name</Label>
+              <Input
+                type="text"
+                id="userLastname"
+                name="userLastname"
+                placeholder="Enter Last name"
+                value={userLastname}
+                onChange={changeHandler}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>User ID</Label>
+              <Input
+                type="text"
+                id="userid"
+                name="userid"
+                placeholder="Enter username"
+                value={userid}
+                onChange={changeHandler}
+                required
+              />
+            </FormGroup>
+            {/* <FormGroup>
+          <Label>Email ID</Label>
+          <Input
+            type="email"
+            id="email"
+            placeholder="Enter email id"
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+            required
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>Mobile number</Label>
+          <Input
+            type="number"
+            id="mobileNumber"
+            placeholder="Enter mobile number"
+            value={mobileNumber}
+            onChange={(e) => setmobileNumber(e.target.value)}
+            required
+          />
+        </FormGroup> */}
+            <FormGroup>
+              <Label>Password</Label>
+              <Input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={changeHandler}
+                required
+              />
+            </FormGroup>
+            <Button
+              className="btn-lg btn-dark btn-block"
+              id="submitButton"
+              type="submit"
+            >
+              Register
+            </Button>
+            <div className="text-center">
+              {/* <a href="/signup">Existing user? Sign in</a> */}
+              <Link to="/login">Existing user? Sign in</Link>
+            </div>
+          </Form>
+        </Formbox>
+      </Container>
+      <ToastContainer autoClose={2000} />
+    </div>
+  );
+};
+
+export default Signup;

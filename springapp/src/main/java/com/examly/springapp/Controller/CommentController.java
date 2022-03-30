@@ -41,7 +41,7 @@ public class CommentController {
 		commentService.updateComment(comment, id);
 	}
 	
-	@RequestMapping(value="/admin/comment",method=RequestMethod.GET) // UPDATES A COMMENT - NEW COMMENT, ID
+	@RequestMapping(value="/admin/comment",method=RequestMethod.GET) // RETRIEVES ALL COMMENTS
 	@CrossOrigin(origins = "http://localhost:8081")
 	public List<CommentModel> getAllComments(){
 		return commentService.getAllComments();
