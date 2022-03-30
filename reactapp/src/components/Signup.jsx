@@ -50,6 +50,7 @@ const Formlogo = styled.div`
 `;
 
 const Signup = () => {
+  const notify = (e) => toast(e);
   const [data, setData] = useState({
     userFirstname: "",
     userLastname: "",
@@ -65,39 +66,45 @@ const Signup = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password.toString().length <= 8) {
-      alert(`Password must contain atleast 8 characters.`);
-    } else if (
-      password.search(/[0-9]/) === -1 ||
-      password.search(/[a-z]/) === -1 ||
-      password.search(/[A-Z]/) === -1 ||
-      //eslint-disable-next-line
-      password.search(
-        /[!\@\#\$\^\&\*\(\)\+\=\-\/\?\.\,\>\<\}\{\]\[\'\"\;\:\]\}\{\`\~]/
-      ) === -1
-    ) {
-      alert(
-        `Password must contain atleast 1 number, 1 Uppercase, 1 Lowercase and 1 Special character.`
-      );
-    } else {
-      console.log(data);
-      axios.post("http://localhost:8081/signup", data).then((res) => {
-        notify("Registered Successfully!");
-        // res =>{auth=true}
-        if (res) {
-          setValid(true);
-        }
-      });
-    }
-  };
-
+    // if (password.toString().length <= 8) {
+    //   alert(`Password must contain atleast 8 characters.`);
+    // } else if (
+    //   password.search(/[0-9]/) === -1 ||
+    //   password.search(/[a-z]/) === -1 ||
+    //   password.search(/[A-Z]/) === -1 ||
+    //   password.search(
+    //     /[!\@\#\$\^\&\*\(\)\+\=\-\/\?\.\,\>\<\}\{\]\[\'\"\;\:\]\}\{\`\~]/
+    //   ) === -1
+    // ) {
+    //   alert(
+    //     `Password must contain atleast 1 number, 1 Uppercase, 1 Lowercase and 1 Special character.`
+    //   );
+    // } else {
+    //   console.log(data);
+    //   axios.post("http://localhost:8081/signup", data).then((res) => {
+    //     notify("Registered Successfully!");
+    //     // res =>{auth=true}
+    //     if (res) {
+    //       setValid(true);
+    //     }
+    //   });
+    // }
+    console.log(data);
+    axios.post("http://localhost:8081/signup", data).then((res) => {
+      if (res.status) {
+        setValid(true);
+      }
+      else
+      {
+        notify("Registration unsuccessful");
+      }
+  });
+  }
   if (valid) {
     return <Navigate to="/login" />;
-  } else {
-    notify("Unsuccessful registration!");
   }
 
-  const notify = (e) => toast(e);
+  
   return (
     <div id="signupBox">
       <Container>

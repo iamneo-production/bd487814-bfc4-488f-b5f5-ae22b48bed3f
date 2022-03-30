@@ -53,6 +53,7 @@ export function saveresp(data) {
 }
 
 const Login = () => {
+  const notify = (e) => toast(e);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -68,47 +69,57 @@ const Login = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password.toString() === "admin" && email.toString() === "admin") {
-      console.log(data);
-      axios.post("http://localhost:8081/login", data).then((res) => {
-        if (res.status) {
+    // if (password.toString() === "admin" && email.toString() === "admin") {
+    //   console.log(data);
+    //   axios.post("http://localhost:8081/login", data).then((res) => {
+    //     if (res.status) {
+    //       setAuthadmin(true);
+    //       notify("Logged in as Admin");
+    //     }
+    //   });
+    // } else if (password.toString().length <= 8) {
+    //   alert(`Password must contain atleast 8 characters.`);
+    // } else if (
+    //   password.search(/[0-9]/) === -1 ||
+    //   password.search(/[a-z]/) === -1 ||
+    //   password.search(/[A-Z]/) === -1 ||
+    //   //eslint-disable-next-line
+    //   password.search(
+    //     /[!\@\#\$\^\&\*\(\)\+\=\-\/\?\.\,\>\<\}\{\]\[\'\"\;\:\]\}\{\`\~]/
+    //   ) === -1
+    // ) {
+    //   alert(
+    //     `Password must contain atleast 1 number, 1 Uppercase, 1 Lowercase and 1 Special character.`
+    //   );
+    // } else {
+    //   console.log(data);
+    //   axios.post("http://localhost:8081/login", data).then((res) => {
+    //     if (res.status) {
+    //       setAuthuser(true);
+    //       saveresp(res);
+    //       notify("Logged in as User");
+    //     } else {
+    //       notify("Invalid Credentials");
+    //     }
+    //   });
+    // }
+
+    console.log(data);
+    axios.post("http://localhost:8081/login", data).then((res) => {
+      if (res.status) {
+        saveresp(res);
+        if (res.role === "ROLE_ADMIN") {
           setAuthadmin(true);
-          notify("Logged in as Admin");
-        }
-      });
-    } else if (password.toString().length <= 8) {
-      alert(`Password must contain atleast 8 characters.`);
-    } else if (
-      password.search(/[0-9]/) === -1 ||
-      password.search(/[a-z]/) === -1 ||
-      password.search(/[A-Z]/) === -1 ||
-      //eslint-disable-next-line
-      password.search(
-        /[!\@\#\$\^\&\*\(\)\+\=\-\/\?\.\,\>\<\}\{\]\[\'\"\;\:\]\}\{\`\~]/
-      ) === -1
-    ) {
-      alert(
-        `Password must contain atleast 1 number, 1 Uppercase, 1 Lowercase and 1 Special character.`
-      );
-    } else {
-      console.log(data);
-      axios.post("http://localhost:8081/login", data).then((res) => {
-        if (res.status) {
-          setAuthuser(true);
-          saveresp(res);
-          notify("Logged in as User");
         } else {
-          notify("Invalid Credentials");
+          setAuthuser(true);
         }
-      });
-    }
+      } else {
+        notify("Invalid Credentials");
+      }
+    });
   };
 
-  const notify = (e) => toast(e);
-
   if (authadmin) {
-    notify("Logged in as Admin");
-
     return <Navigate to="/admin" />;
   }
   if (authuser) {
