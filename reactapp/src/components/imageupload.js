@@ -10,7 +10,7 @@ class ImageUpload extends React.Component {
 
   onDrop(pictureFiles, pictureDataURLs) {
     this.setState({
-      pictures: this.state.pictures.concat(pictureFiles)
+      pictures: this.state.pictures.concat(pictureFiles),
     });
   }
 
