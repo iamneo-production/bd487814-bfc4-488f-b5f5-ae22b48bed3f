@@ -48,8 +48,8 @@ const Formlogo = styled.div`
 `;
 
 //Save the token from the response
-export function saveresp(data) {
-  localStorage.setItem("token", JSON.stringify(data.token));
+export function saveresp(res) {
+  localStorage.setItem("token", JSON.stringify(res.data.token));
 }
 
 const Login = () => {

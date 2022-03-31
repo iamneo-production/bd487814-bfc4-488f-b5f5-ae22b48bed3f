@@ -34,7 +34,7 @@ public class UserController {
 		userService.userDelete(id);
 	}
 	
-	@RequestMapping(value="/admin/add user",method=RequestMethod.POST) // ADMIN HAS THE PRIVILGE TO ADD NEW USER
+	@RequestMapping(value="/admin/adduser",method=RequestMethod.POST) // ADMIN HAS THE PRIVILGE TO ADD NEW USER
 	@CrossOrigin(origins = "http://localhost:8081")
 	public void userEditSave(@RequestBody UserModel user) {
 		userService.userEditSave(user);
