@@ -1,5 +1,6 @@
 .newUser {
     flex: 5;
+    margin-top: 82px;
     /* padding-left: 10rem; */
     /* padding-top: 4rem; */
   }
@@ -7,6 +8,7 @@
   .newUserForm {
     display: auto;
     flex-wrap: wrap;
+    margin-bottom: 50px;
   }
   
   .newUserItem {
