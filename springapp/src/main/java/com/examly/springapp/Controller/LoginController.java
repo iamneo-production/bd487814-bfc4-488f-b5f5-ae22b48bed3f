@@ -69,7 +69,7 @@ public class LoginController {
 		}
 		else
 		{
-			return new ResponseEntity<>(new LoginResponseModel(false),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new LoginResponseModel(false),HttpStatus.OK);
 		}
 	}
 }

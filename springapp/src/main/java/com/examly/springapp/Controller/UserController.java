@@ -36,14 +36,28 @@ public class UserController {
 	
 	@RequestMapping(value="/admin/adduser",method=RequestMethod.POST) // ADMIN HAS THE PRIVILGE TO ADD NEW USER
 	@CrossOrigin(origins = "http://localhost:8081")
-	public void userEditSave(@RequestBody UserModel user) {
-		userService.userEditSave(user);
+	public ResponseEntity<Object> userEditSave(@RequestBody UserModel user) {
+		if(userService.userEditSave(user))
+		{
+            return new ResponseEntity<>(true,HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<>(false,HttpStatus.OK);
+		}
 	}
 	
 	@RequestMapping(value="/admin/userEdit/{id}",method=RequestMethod.PUT)
 	@CrossOrigin(origins = "http://localhost:8081")
-	public void userEdit(@RequestBody UserModel user,@PathVariable String id) { // ADMIN HAS THE PRIVILGE TO EDIT USER DETAILS
-		userService.userEdit(user);
+	public ResponseEntity<Object> userEdit(@RequestBody UserModel user,@PathVariable String id) { // ADMIN HAS THE PRIVILGE TO EDIT USER DETAILS
+		if(userService.userEdit(user,id))
+		{
+            return new ResponseEntity<>(true,HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<>(false,HttpStatus.OK);
+		}
 	}
 	
 }
