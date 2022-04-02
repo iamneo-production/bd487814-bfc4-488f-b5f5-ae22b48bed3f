@@ -90,7 +90,7 @@ const Signup = () => {
     //   });
     // }
     console.log(data);
-    axios.post("http://localhost:8081/signup", data).then((res) => {
+    axios.post("http://localhost:8080/signup", data).then((res) => {
       if (res.data.status) {
         setValid(true);
       }

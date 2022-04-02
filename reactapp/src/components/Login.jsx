@@ -49,7 +49,7 @@ const Formlogo = styled.div`
 
 //Save the token from the response
 export function saveresp(res) {
-  localStorage.setItem("token", JSON.stringify(res.data.token));
+  sessionStorage.setItem("token",res.data.token);
 }
 
 const Login = () => {
@@ -105,7 +105,7 @@ const Login = () => {
     // }
 
     console.log(data);
-    axios.post("http://localhost:8081/login", data).then((res) => {
+    axios.post("http://localhost:8080/login", data).then((res) => {
       if (res.data.status) {
         saveresp(res);
         if (res.data.role === "ROLE_ADMIN") {
