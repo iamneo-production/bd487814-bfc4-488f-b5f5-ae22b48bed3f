@@ -8,7 +8,6 @@ import AddUser from "./components/admin/AddUser";
 import Image from "./components/image";
 //import Id from "./components/id";
 import ImageUpload from "./components/imageupload";
-// import Usercard from "./components/admin/Usercard";
 import "./App.css";
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
         <Route exact path="uploadimg" element={<ImageUpload />} />
         <Route path="admin/adduser" element={<AddUser />} />
         <Route path="admin/userEdit" element={<AddUser />} />
-        {/* <Route path="/usercard" element={<Usercard />} /> */}
       </Routes>
     </BrowserRouter>
   );
