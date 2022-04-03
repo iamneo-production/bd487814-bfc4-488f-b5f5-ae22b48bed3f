@@ -1,13 +1,14 @@
-import React, { useContext,useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./darkmode/dark.scss";
 import "./AddUserForm.css";
-import Navbar from "./Navbar";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 export default function AddUserForm(props) {
+  const token = sessionStorage.getItem("token");
   const notify = (e) => toast(e);
   const { darkMode } = useContext(DarkModeContext);
   const [data, setData] = useState({
@@ -22,17 +23,44 @@ export default function AddUserForm(props) {
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-
+  const usePathname = () => {
+    const location = useLocation();
+    return location.pathname;
+  };
+  let currentPath = usePathname();
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(data);
-  }
+    if (currentPath === "/admin/userEdit") {
+      currentPath = currentPath + "/" + data.email;
+    } else if (currentPath === "/admin") {
+      currentPath = currentPath + "/adduser";
+    }
+    //notify(currentPath);
+    axios
+      .post("http://localhost:8080" + currentPath, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        if (res.data.status) {
+          notify("New User Added Successfully");
+        } else {
+          notify(
+            "User already exists and the user details are succefully updated"
+          );
+        }
+      });
+  };
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <div className="newUser">
-        <h1 className="newUserTitle">Add New User</h1>
-        <form className="newUserForm" onSubmit={submitHandler}>
+        <h1 className="newUserTitle">Add/Edit User</h1>
+        <form
+          name="userdetails-form"
+          className="newUserForm"
+          onSubmit={submitHandler}
+        >
           <div className="newUserItem">
             <label>Username</label>
             <input
@@ -48,7 +76,7 @@ export default function AddUserForm(props) {
           <div className="newUserItem">
             <label>Email</label>
             <input
-              type="email"
+              type="string"
               placeholder="Enter Your Email ID"
               id="email"
               name="email"
@@ -85,11 +113,25 @@ export default function AddUserForm(props) {
             <label>Role</label>
             <div>
               <span className="user_role">
-                <input type="radio" name="role" id="user" value="user" onChange={changeHandler} required/>
+                <input
+                  type="radio"
+                  name="role"
+                  id="user"
+                  value="user"
+                  onChange={changeHandler}
+                  required
+                />
                 <label htmlFor="user">user</label>
               </span>
               <span className="user_role">
-                <input type="radio" name="role" id="admin" value="admin" onChange={changeHandler}required/>
+                <input
+                  type="radio"
+                  name="role"
+                  id="admin"
+                  value="admin"
+                  onChange={changeHandler}
+                  required
+                />
                 <label htmlFor="admin">admin</label>
               </span>
             </div>
@@ -97,7 +139,7 @@ export default function AddUserForm(props) {
           <button
             className="newUserButton"
             type="submit"
-            onClick={() => notify("Operation successfully")}
+            //onClick={() => notify("Operation successfull")}
           >
             Submit
           </button>

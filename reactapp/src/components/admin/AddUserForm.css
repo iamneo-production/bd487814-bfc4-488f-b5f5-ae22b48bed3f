@@ -31,6 +31,7 @@
     padding: 10px;
     border: 1px solid gray;
     border-radius: 5px;
+    color: #777;
   }
   
   .newUserRole > input {

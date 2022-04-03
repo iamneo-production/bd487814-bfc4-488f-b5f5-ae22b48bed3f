@@ -17,7 +17,7 @@ margin: 0 auto ;
 //Home page at admin side
 function Admin() {
   const { darkMode } = useContext(DarkModeContext);
-  if (!(sessionStorage.getItem("token"))) {
+  if ((sessionStorage.getItem("token"))) {
     return <Navigate to="/login" />;
   }
   return (
