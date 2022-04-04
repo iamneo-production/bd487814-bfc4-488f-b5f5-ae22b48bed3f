@@ -1,5 +1,6 @@
 import React, { useContext,useState } from "react";
-//import { Link, useLocation } from "react-router-dom";
+// eslint-disable-next-line
+import { Link, useLocation, Navigate } from "react-router-dom";
 import "./darkmode/dark.scss";
 import "./AddUserForm.css";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
@@ -8,9 +9,10 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 export default function AddUserForm(props) {
-    const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const notify = (e) => toast(e);
   const { darkMode } = useContext(DarkModeContext);
+  const [successfull, setSuccessfull] = useState(false);
   const [data, setData] = useState({
     email: "",
     username: "",
@@ -18,6 +20,7 @@ export default function AddUserForm(props) {
     password: "",
     role: "",
   });
+  // eslint-disable-next-line
   const { email, username, mobileNumber, password, role } = data;
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -29,20 +32,21 @@ export default function AddUserForm(props) {
   //const currentPath = usePathname();
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(data);
-    axios.put("http://localhost:8080/admin/editUser/"+data.email, data, {
+    axios.put("http://localhost:8080/admin/userEdit/"+data.email, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         if (res.data) {
           notify("User details are succefully updated");
-          window.location.reload();
+          setSuccessfull(true);
         } else {
           notify("User details are not updated");
         }
       });
   };
-
+  if(successfull){
+    return <Navigate to="/admin" />; 
+  };
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <div className="newUser">

@@ -28,9 +28,14 @@ export default function Userslist() {
 
   const columns = [
     {
+      field: "id",
+      headerName: "S. No",
+      width: 70,
+    },
+    {
       field: "username",
       headerName: "Username",
-      width: 150,
+      width: 120,
       textAlign: "center",
     },
     { field: "email", headerName: "Email", width: 230 },
@@ -70,17 +75,14 @@ export default function Userslist() {
       .then((res) => {
         console.log(res);
         var i;
-
         for (i = 0; i < res.data.length; i++) {
           res.data[i]["id"] = i;
-
           if (res.data[i]["role"] === "ROLE_ADMIN") {
             res.data[i]["role"] = "ADMIN";
           } else {
             res.data[i]["role"] = "USER";
           }
         }
-
         setData(res.data);
       });
     // eslint-disable-next-line
