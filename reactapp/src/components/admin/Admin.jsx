@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import "./darkmode/dark.scss";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
 import Navbar from "./Navbar";
-import Userslist from "./Userslist";
+import TempUserList from "./TempUserList";
 import AddUserForm from "./AddUserForm";
 import styled from "styled-components";
 
@@ -25,7 +25,7 @@ function Admin() {
       <Navbar />
       <div className="add_user_main">
         <div className="add_user_component">
-        <Userslist />
+        <TempUserList />
         </div>
         <AdminHomeAdduser>
         <div>

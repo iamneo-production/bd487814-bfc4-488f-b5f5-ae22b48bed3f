@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Admin from "./components/admin/Admin";
 import Home from "./components/Home";
 import AddUser from "./components/admin/AddUser";
+import UserEdit from "./components/admin/UserEdit";
 import Image from "./components/image";
 //import Id from "./components/id";
 import ImageUpload from "./components/imageupload";
@@ -23,7 +24,8 @@ function App() {
         {/* <Route exact path="/id" element={<Id />} /> */}
         <Route exact path="uploadimg" element={<ImageUpload />} />
         <Route path="admin/adduser" element={<AddUser />} />
-        <Route path="admin/userEdit" element={<AddUser />} />
+        <Route path="admin/userEdit" element={<UserEdit />} />
+        <Route path="admin/userEdit/:id" element={<UserEdit />} />
       </Routes>
     </BrowserRouter>
   );

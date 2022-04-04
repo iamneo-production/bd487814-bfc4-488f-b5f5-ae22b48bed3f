@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext,useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./darkmode/dark.scss";
 import "./AddUserForm.css";
@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 export default function AddUserForm(props) {
-  const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
   const notify = (e) => toast(e);
   const { darkMode } = useContext(DarkModeContext);
   const [data, setData] = useState({
@@ -18,7 +18,6 @@ export default function AddUserForm(props) {
     password: "",
     role: "",
   });
-
   const { email, username, mobileNumber, password, role } = data;
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -26,28 +25,20 @@ export default function AddUserForm(props) {
   // const usePathname = () => {
   //   const location = useLocation();
   //   return location.pathname;
-  // };
-  //let currentPath = usePathname();
+  // }
+  //const currentPath = usePathname();
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(data);
-    // if (currentPath === "/admin/userEdit") {
-    //   currentPath = currentPath + "/" + data.email;
-    // } else if (currentPath === "/admin") {
-    //   currentPath = currentPath + "/adduser";
-    // }
-    //notify(currentPath);
-    axios.post("http://localhost:8080/admin/adduser", data, {
+    axios.put("http://localhost:8080/admin/editUser/"+data.email, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         if (res.data.status) {
-          notify("New User Added Successfully");
+          notify("User details are succefully updated");
           window.location.reload();
         } else {
-          notify(
-            "User already exists and the user details are succefully updated"
-          );
+          notify("User details are not updated");
         }
       });
   };
@@ -55,7 +46,7 @@ export default function AddUserForm(props) {
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <div className="newUser">
-        <h1 className="newUserTitle">Add New User</h1>
+        <h1 className="newUserTitle">Add/Edit User</h1>
         <form
           name="userdetails-form"
           className="newUserForm"
@@ -148,4 +139,5 @@ export default function AddUserForm(props) {
       <ToastContainer autoClose={2000} />
     </div>
   );
+
 }
