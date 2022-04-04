@@ -1,5 +1,5 @@
 import React, { useContext,useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+//import { Link, useLocation } from "react-router-dom";
 import "./darkmode/dark.scss";
 import "./AddUserForm.css";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
@@ -34,7 +34,7 @@ export default function AddUserForm(props) {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        if (res.data.status) {
+        if (res.data) {
           notify("User details are succefully updated");
           window.location.reload();
         } else {
@@ -46,7 +46,7 @@ export default function AddUserForm(props) {
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <div className="newUser">
-        <h1 className="newUserTitle">Add/Edit User</h1>
+        <h1 className="newUserTitle">Edit User</h1>
         <form
           name="userdetails-form"
           className="newUserForm"

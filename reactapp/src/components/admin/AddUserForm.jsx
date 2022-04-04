@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+//import { Link, useLocation } from "react-router-dom";
 import "./darkmode/dark.scss";
 import "./AddUserForm.css";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
@@ -30,24 +30,23 @@ export default function AddUserForm(props) {
   //let currentPath = usePathname();
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(data);
+    //console.log(data);
     // if (currentPath === "/admin/userEdit") {
     //   currentPath = currentPath + "/" + data.email;
     // } else if (currentPath === "/admin") {
     //   currentPath = currentPath + "/adduser";
     // }
     //notify(currentPath);
-    axios.post("http://localhost:8080/admin/adduser", data, {
+    axios
+      .post("http://localhost:8080/admin/adduser", data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        if (res.data.status) {
+        if (res.data) {
           notify("New User Added Successfully");
           window.location.reload();
         } else {
-          notify(
-            "User already exists and the user details are succefully updated"
-          );
+          notify("Username/Email Id already exists");
         }
       });
   };
