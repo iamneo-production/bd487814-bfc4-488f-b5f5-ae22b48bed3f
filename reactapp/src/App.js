@@ -6,6 +6,8 @@ import Admin from "./components/admin/Admin";
 import Home from "./components/Home";
 import AddUser from "./components/admin/AddUser";
 import Image from "./components/image";
+import { ProfilePage } from "./ProfilePage";
+
 //import Id from "./components/id";
 import ImageUpload from "./components/imageupload";
 // import Usercard from "./components/admin/Usercard";
@@ -25,6 +27,10 @@ function App() {
         <Route exact path="uploadimg" element={<ImageUpload />} />
         <Route path="admin/adduser" element={<AddUser />} />
         {/* <Route path="/usercard" element={<Usercard />} /> */}
+        <Route path="/profile">
+          <ProfilePage />
+        </Route>
+       
       </Routes>
     </BrowserRouter>
   );
