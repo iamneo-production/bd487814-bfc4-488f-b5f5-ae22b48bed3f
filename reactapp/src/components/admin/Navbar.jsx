@@ -48,7 +48,14 @@ function Navbar() {
           ></div>
         </div>
         <div className="item">
-          <ExitToAppIcon className="icon" />
+          <Link to="/login">
+            <ExitToAppIcon
+              className="icon"
+              onClick={() => {
+                sessionStorage.clear();
+              }}
+            />
+          </Link>
         </div>
       </div>
     </div>

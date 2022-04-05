@@ -1,6 +1,5 @@
-import React, { useContext,useState } from "react";
-// eslint-disable-next-line
-import { Link, useLocation, Navigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import "./darkmode/dark.scss";
 import "./AddUserForm.css";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
@@ -18,21 +17,38 @@ export default function AddUserForm(props) {
     username: "",
     mobileNumber: "",
     password: "",
-    role: "",
   });
-  // eslint-disable-next-line
-  const { email, username, mobileNumber, password, role } = data;
+  const { email, username, mobileNumber, password } = data;
+  useEffect(() => {
+    const url = window.location.href;
+    const lastSegment = url.substring(url.lastIndexOf("/") + 1);
+    axios
+      .get("http://localhost:8080/admin/userEdit/" + lastSegment, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        if (res.data.status) {
+          setData({
+            email: res.data.email,
+            username: res.data.username,
+            mobileNumber: res.data.mobileNumber,
+            password: "",
+          });
+        } else {
+          window.alert("User doesn't exist");
+          window.location.href = "/admin";
+        }
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-  // const usePathname = () => {
-  //   const location = useLocation();
-  //   return location.pathname;
-  // }
-  //const currentPath = usePathname();
   const submitHandler = (e) => {
     e.preventDefault();
-    axios.put("http://localhost:8080/admin/userEdit/"+data.email, data, {
+    axios
+      .put("http://localhost:8080/admin/userEdit/" + data.email, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -44,9 +60,9 @@ export default function AddUserForm(props) {
         }
       });
   };
-  if(successfull){
-    return <Navigate to="/admin" />; 
-  };
+  if (successfull) {
+    return <Navigate to="/admin" />;
+  }
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <div className="newUser">
@@ -60,10 +76,10 @@ export default function AddUserForm(props) {
             <label>Username</label>
             <input
               type="text"
-              placeholder="Enter Your Username"
+              placeholder="Enter Username"
               id="username"
               name="username"
-              value={username}
+              defaultValue={username}
               onChange={changeHandler}
               required
             />
@@ -72,10 +88,11 @@ export default function AddUserForm(props) {
             <label>Email</label>
             <input
               type="string"
-              placeholder="Enter Your Email ID"
+              disabled={true}
+              placeholder="Enter Email ID"
               id="email"
               name="email"
-              value={email}
+              defaultValue={email}
               onChange={changeHandler}
               required
             />
@@ -84,10 +101,10 @@ export default function AddUserForm(props) {
             <label>Password</label>
             <input
               type="password"
-              placeholder="Enter Your Password"
+              placeholder="Enter Password"
               id="password"
               name="password"
-              value={password}
+              defaultValue={password}
               onChange={changeHandler}
               required
             />
@@ -96,40 +113,13 @@ export default function AddUserForm(props) {
             <label>Phone</label>
             <input
               type="text"
-              placeholder="Enter Your Phone Number"
+              placeholder="Enter Phone Number"
               id="mobileNumber"
               name="mobileNumber"
-              value={mobileNumber}
+              defaultValue={mobileNumber}
               onChange={changeHandler}
               required
             />
-          </div>
-          <div className="newUserItem">
-            <label>Role</label>
-            <div>
-              <span className="user_role">
-                <input
-                  type="radio"
-                  name="role"
-                  id="user"
-                  value="user"
-                  onChange={changeHandler}
-                  required
-                />
-                <label htmlFor="user">user</label>
-              </span>
-              <span className="user_role">
-                <input
-                  type="radio"
-                  name="role"
-                  id="admin"
-                  value="admin"
-                  onChange={changeHandler}
-                  required
-                />
-                <label htmlFor="admin">admin</label>
-              </span>
-            </div>
           </div>
           <button
             className="newUserButton"
@@ -143,5 +133,4 @@ export default function AddUserForm(props) {
       <ToastContainer autoClose={2000} />
     </div>
   );
-
 }

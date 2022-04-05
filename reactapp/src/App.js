@@ -22,7 +22,6 @@ function App() {
         <Route exact path="image" element={<Image />} />
         <Route exact path="uploadimg" element={<ImageUpload />} />
         <Route path="admin/adduser" element={<AddUser />} />
-        <Route path="admin/userEdit" element={<UserEdit />} />
         <Route path="admin/userEdit/:id" element={<UserEdit />} />
       </Routes>
     </BrowserRouter>
