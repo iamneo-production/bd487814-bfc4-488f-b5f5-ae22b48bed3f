@@ -13,6 +13,7 @@ import com.examly.springapp.Model.ImageModel;
 import com.examly.springapp.Model.UserModel;
 import com.examly.springapp.Repository.CommentRepository;
 import com.examly.springapp.Repository.ImageRepository;
+import com.examly.springapp.Repository.UserRepository;
 
 @Service
 @Transactional
@@ -22,6 +23,9 @@ public class CommentService {
 	
 	@Autowired
 	private ImageRepository imageRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 	
 	public void addComment(CommentModel comment, String id) {
 		commentRepo.save(comment);
@@ -51,7 +55,19 @@ public class CommentService {
 		
 		for(CommentModel i:commentRepo.findAll())
 		{
-			comments.add(new CommentModel(i.getCommentId(),i.getComment(),new UserModel(i.getUserId().getEmail())));
+			UserModel tempUserModel = new UserModel();
+			
+			for(UserModel k:userRepo.findAll())
+			{
+				if((k.getEmail().equals(i.getUserId().getEmail())))
+				{
+					tempUserModel.setEmail(i.getUserId().getEmail());
+					tempUserModel.setUsername(k.getUsername());
+					break;
+				}
+			}
+			
+			comments.add(new CommentModel(i.getCommentId(),i.getComment(),tempUserModel));
 		}
 		
 		return comments;
