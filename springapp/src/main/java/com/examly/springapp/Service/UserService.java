@@ -115,22 +115,6 @@ public class UserService {
 	}
 	
 	public boolean userEditSave(UserModel user) {
-		/*for(UserModel i:userRepo.findAll())
-		{
-			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin")))
-			{
-				
-			}
-		}
-		
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setActive(false);
-		
-		if(user.getRole()==null)
-		{
-			user.setRole("USER");
-		}*/
-		
 		for(UserModel i:userRepo.findAll())
 		{
 			if((i.getEmail().equals(user.getEmail())) || (user.getEmail().equals("admin")) || (i.getUsername().equals(user.getUsername()))) // CHECKS WHETHER THE EMAIL AND USERNAME ALREADY EXISTS OR NOT
@@ -158,39 +142,23 @@ public class UserService {
 		return true;
 	}
 
-	public boolean userEdit(UserModel user, String id) { // NOT ALLOWED TO CHANGE USERNAME
-		//userRepo.delete(userRepo.findByEmail(id));
-		
-		//userRepo.findByEmail(id).setEmail(user.getEmail());
-		
+	public boolean userEdit(UserModel user, String id) {
 		for(UserModel i:userRepo.findAll())
 		{
-			if((i.getUsername().equals(user.getUsername()))) // CHECKS WHETHER THE EMAIL AND USERNAME ALREADY EXISTS OR NOT
+			if(userRepo.findByEmail(id).getUsername().equals(user.getUsername()))
+			{
+				continue;
+			}
+			
+			if(i.getUsername().equals(user.getUsername())) // CHECKS WHETHER THE USERNAME ALREADY EXISTS OR NOT
 			{
 				return false;
 			}
 		}
 		
-		userRepo.findByEmail(id).setUsername(user.getUsername());
-		
-		userRepo.findByEmail(id).setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		userRepo.findByEmail(id).setMobileNumber(user.getMobileNumber());
-		
-		if(user.getRole().toLowerCase().equals("user"))
-		{
-			userRepo.findByEmail(id).setRole("ROLE_USER");
-		}
-		else if(user.getRole().toLowerCase().equals("admin"))
-		{
-			userRepo.findByEmail(id).setRole("ROLE_ADMIN");
-		}
-		
-		userRepo.save(user);
-		
-		return true;
-		
-		/*user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		if(user.getRole().toLowerCase().equals("user"))
 		{
@@ -199,8 +167,17 @@ public class UserService {
 		else if(user.getRole().toLowerCase().equals("admin"))
 		{
 			user.setRole("ROLE_ADMIN");
-		}*/
+		}
 		
+		userRepo.save(user);
+		
+		return true;
+		
+	}
+	
+	
+	public UserModel getUserDetails(String email) {
+		return userRepo.findByEmail(email);
 	}
 
 }
