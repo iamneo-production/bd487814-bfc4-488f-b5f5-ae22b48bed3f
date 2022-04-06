@@ -1,0 +1,64 @@
+.editUser {
+    flex: 5;
+    margin-top: 82px;
+    max-height: 587px;
+    /* padding-left: 10rem; */
+    /* padding-top: 4rem; */
+  }
+  
+  .editUserForm {
+    display: auto;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  
+  .editUserItem {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+  
+  .editUserItem > label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(151, 150, 150);
+  }
+  
+  .editUserItem > input {
+    height: 40px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    color: #777;
+  }
+   
+  .editUserButton {
+    width: 200px;
+    border: none;
+    background-color: darkblue;
+    color: white;
+    padding: 7px 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 30px;
+    cursor: pointer;
+  }
+  
+  .edit_user_main {
+    display: flex;
+  }
+  
+  .edit_user_component {
+    width: 50%;
+  }
+  
+  .edit_user {
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+
+  

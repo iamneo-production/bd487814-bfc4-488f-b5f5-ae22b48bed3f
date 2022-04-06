@@ -5,6 +5,7 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
+import { Button } from "@mui/material";
 
 function Navbar() {
   const { dispatch } = useContext(DarkModeContext);
@@ -37,16 +38,48 @@ function Navbar() {
             onClick={() => dispatch({ type: "TOGGLE" })}
           />
         </div>
-        <div className="bottom">
-          <div
-            className="colorOption"
-            onClick={() => dispatch({ type: "LIGHT" })}
-          ></div>
-          <div
-            className="colorOption"
-            onClick={() => dispatch({ type: "DARK" })}
-          ></div>
-        </div>
+        <Button
+          href="admin"
+          className="navbutton"
+          variant="outlined"
+          style={{
+            color: "#777",
+            border: "2px solid #777",
+            padding: "5px 25px",
+            fontSize: "15px",
+            size: "large",
+          }}
+        >
+          HOME
+        </Button>
+        <Button
+          href="admin/images"
+          className="navbutton"
+          variant="outlined"
+          style={{
+            color: "#777",
+            border: "2px solid #777",
+            padding: "5px 25px",
+            fontSize: "15px",
+            size: "large",
+          }}
+        >
+          /IMAGES
+        </Button>
+        <Button
+          href="admin/comment"
+          className="navbutton"
+          variant="outlined"
+          style={{
+            color: "#777",
+            border: "2px solid #777",
+            padding: "5px 25px",
+            fontSize: "15px",
+            size: "large",
+          }}
+        >
+          /COMMENTS
+        </Button>
         <div className="item">
           <Link to="/login">
             <ExitToAppIcon

@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import "./darkmode/dark.scss";
-import "./AddUserForm.css";
+import "./UserEditForm.css";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
-export default function AddUserForm(props) {
+export default function UserEditForm(props) {
   const token = sessionStorage.getItem("token");
   const notify = (e) => toast(e);
   const { darkMode } = useContext(DarkModeContext);
@@ -65,14 +65,14 @@ export default function AddUserForm(props) {
   }
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      <div className="newUser">
+      <div className="editUser">
         <h1 className="newUserTitle">Edit User</h1>
         <form
           name="userdetails-form"
-          className="newUserForm"
+          className="editUserForm"
           onSubmit={submitHandler}
         >
-          <div className="newUserItem">
+          <div className="editUserItem">
             <label>Username</label>
             <input
               type="text"
@@ -84,7 +84,7 @@ export default function AddUserForm(props) {
               required
             />
           </div>
-          <div className="newUserItem">
+          <div className="editUserItem">
             <label>Email</label>
             <input
               type="string"
@@ -97,7 +97,7 @@ export default function AddUserForm(props) {
               required
             />
           </div>
-          <div className="newUserItem">
+          <div className="editUserItem">
             <label>Password</label>
             <input
               type="password"
@@ -109,7 +109,7 @@ export default function AddUserForm(props) {
               required
             />
           </div>
-          <div className="newUserItem">
+          <div className="editUserItem">
             <label>Phone</label>
             <input
               type="text"
@@ -122,7 +122,7 @@ export default function AddUserForm(props) {
             />
           </div>
           <button
-            className="newUserButton"
+            className="editUserButton"
             type="submit"
             //onClick={() => notify("Operation successfull")}
           >

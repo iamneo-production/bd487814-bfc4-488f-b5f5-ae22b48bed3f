@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import "./darkmode/dark.scss";
-import "./AddUserForm.css";
+import "./UserEditForm.css";
 import UserEditForm from "./UserEditForm";
 import Navbar from "./Navbar";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
@@ -15,7 +15,7 @@ export default function UserEdit() {
     <div className={darkMode ? "app dark" : "app"}>
       <div>
         <Navbar />
-        <div className="add_user">
+        <div className="edit_user">
           <UserEditForm />
         </div>
       </div>
