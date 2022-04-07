@@ -1,30 +1,14 @@
-import React, { useState, useEffect, useContext  } from "react";
-import "./Post.css";
-import UserImg from "./user.png";
-import PostImg from "./postimg.jpg";
-import Comments from "./Comments";
-import axios from "axios";
+import React, { useState } from "react";
+import "../admin/newsfeed/Post.css";
+import UserImg from "../admin/newsfeed/user.png";
+import PostImg from "../admin/newsfeed/postimg.jpg";
+import Comments from "../admin/newsfeed/Comments";
+import axios from 'axios';
+import AddComment from "./AddComment";
 
-const Post = (props) => {
+const UserPost = (props) => {
   const [comments, setComments] = useState(false);
-  const token = sessionStorage.getItem("token");
-
-  const deleteImage = () => {
-    axios.delete(`http://localhost:8080/admin/image/${props.imageId}`).then(()=> {
-      window.location.reload()
-    })
-
-  }
-
-  useEffect(() => {
-    axios.get(`http://localhost:8080/image/${props.imageId}`,{
-      headers: { Authorization: `Bearer ${token}` },
-    }).then(
-      (res) => {
-        console.log(res);
-      }
-    )
-  });
+  
 
   const loadComments = () => {
     if (comments === true) {
@@ -37,14 +21,6 @@ const Post = (props) => {
   return (
     <>
       <div className="main__feed">
-        <div className="controls">
-          <div className="deletePost">
-            <button onClick={deleteImage}>Delete</button>
-          </div>
-          <div className="editPost">
-            <button>Edit</button>
-          </div>
-        </div>
 
         <div className="feed__user">
           <div>
@@ -53,7 +29,7 @@ const Post = (props) => {
           <div className="feed__username">{props.username}</div>
         </div>
         <div>
-          <img className="feed__postImg" src={`postimg.jpg`} alt="" />
+          <img className="feed__postImg" src={PostImg} alt="" />
         </div>
 
         <div className="line"></div>
@@ -112,6 +88,7 @@ const Post = (props) => {
         </div>
 
         <div style={{ display: comments ? "block" : "none" }}>
+            <AddComment imageId = {props.imageId} />
           <Comments comments={props.comments} />
         </div>
       </div>
@@ -119,4 +96,4 @@ const Post = (props) => {
   );
 };
 
-export default Post;
+export default UserPost;

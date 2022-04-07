@@ -1,0 +1,42 @@
+.userfeed__addcomment {
+    display:flex;
+    padding:0 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.userfeed__commentbox{
+    flex:auto;
+    width:80%;
+}
+
+.userfeed__form {
+    border:1px solid #c5c5c5;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 30px;
+
+    padding:5px;
+
+}
+
+.userfeed__form > input {
+    width:80%;
+    border:none;
+    font-size: 16px;
+}
+
+.userfeed__form > input:focus {
+    outline: none;
+}
+
+.userfeed__form > button {
+    width:15%;
+    border:none;
+    background-color:white;
+}
+
+.userfeed__form > button:hover {
+    cursor:pointer;
+}

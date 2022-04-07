@@ -9,6 +9,7 @@ import AddUser from "./components/admin/AddUser";
 import UserEdit from "./components/admin/UserEdit";
 //import Image from "./components/image";
 import ImageUpload from "./components/imageupload";
+import UserFeed from "./components/userfeed/UserFeed";
 import "./App.css";
 
 function App() {
@@ -19,12 +20,13 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         <Route path="admin" element={<Admin />} />
-        <Route path="home" element={<Home />} />
+        {/* <Route path="home" element={<Home />} /> */}
         {/* <Route exact path="image" element={<Image />} /> */}
         <Route exact path="uploadimg" element={<ImageUpload />} />
         <Route path="admin/adduser" element={<AddUser />} />
         <Route path="admin/userEdit/:id" element={<UserEdit />} />
         <Route path="admin/image" element={<Feed />} />
+        <Route path="home" element={<UserFeed />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,17 +1,13 @@
-import React, {useState, useEffect, useContext } from "react";
-import "./Post.css";
-import Post from './Post';
+import React, {useState, useEffect} from "react";
+import "../admin/newsfeed/Post.css";
+import UserPost from './UserPost';
 import axios from 'axios';
-import "../darkmode/dark.scss"
-import { DarkModeContext } from "../darkmode/DarkModeContext";
-import Navbar from "../Navbar";
+import { Navigate } from "react-router-dom";
 
-const Feed = () => {
-  const { darkMode } = useContext(DarkModeContext);
+const UserFeed = () => {
+
   const token = sessionStorage.getItem("token");
   const [data,setData] = useState([]);
-  
-
   useEffect(() => {
     axios.get('http://localhost:8080/admin/image',{
       headers: { Authorization: `Bearer ${token}` },
@@ -22,15 +18,15 @@ const Feed = () => {
     )
   });
 
-  
+  if (!(sessionStorage.getItem("token"))) {
+    return <Navigate to="/login" />;
+  }
   return (
-    <div className={darkMode ? "app dark" : "app"}>
-      <Navbar />
     <div>
       <div className="main">
         {
           data.map(
-            (item) => <Post
+            (item) => <UserPost
               imageId={item.imageId}
               imageName={item.imageName}
               imageTag={item.imageTag}
@@ -41,8 +37,7 @@ const Feed = () => {
         }
       </div>
     </div>
-    </div>
   );
 };
 
-export default Feed;
+export default UserFeed;
