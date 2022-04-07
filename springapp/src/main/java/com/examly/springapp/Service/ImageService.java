@@ -45,6 +45,11 @@ public class ImageService {
 		
 	}
 	
+	/*public void addImage(ImageModel img) {
+		imageRepo.save(img);
+		
+	}*/
+	
 	public void deleteImage(String id) {
 		imageRepo.delete(imageRepo.findByImageId(id));
 		
@@ -60,6 +65,11 @@ public class ImageService {
 		imageRepo.save(img);
 		
 	}
+	
+	/*public void updateImage(ImageModel img) {
+		imageRepo.save(img);
+	
+	}*/
 	
 	public ImageModel showImage(String id) {
 		return imageRepo.findById(id).get();

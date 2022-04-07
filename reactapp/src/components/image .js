@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { confirm } from "react-confirm-box";
 import "./image.css";
-import "./profile.js";
 
 export default function Image() {
 
@@ -44,6 +43,9 @@ export default function Image() {
                     </div>
                 </div>
                 <div className="navigation-icons">
+                    <Link to="#" className="navigation-link">
+                        <i className="far fa-compass" />
+                    </Link>
                     <Link to="/uploadimg" className="navigation-link notifica">
                         <i className="fa fa-plus" aria-hidden="true"/>
                     </Link>

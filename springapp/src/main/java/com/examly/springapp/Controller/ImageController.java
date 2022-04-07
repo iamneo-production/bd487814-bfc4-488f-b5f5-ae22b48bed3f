@@ -49,6 +49,14 @@ public class ImageController {
 	}
 	
 	
+	/*@RequestMapping(value="/image/add",method=RequestMethod.POST)
+	@CrossOrigin(origins = "http://localhost:8081")
+	public void addImage(@RequestParam("image") Blob img){
+		
+		imgService.addImage(img);
+	}*/
+	
+	
 	@RequestMapping(value="/admin/image/{id}",method=RequestMethod.DELETE) // ONLY ADMIN CAN DELETE AN IMAGE - ID
 	@CrossOrigin(origins = "http://localhost:8081")
 	public void deleteImage(@PathVariable String id){ // DELETES AN IMAGE FROM THE DB
@@ -72,6 +80,12 @@ public class ImageController {
 		
 	}
 	
+	/*@RequestMapping(value="/image/update/{id}",method=RequestMethod.PUT)
+	@CrossOrigin(origins = "http://localhost:8081")
+	public void updateImage(@RequestParam("image") Blob img, @PathVariable String id){
+		imgService.updateImage(img);
+		
+	}*/
 	
 	@RequestMapping(value={"/image/{id}","/admin/image/{id}"},method=RequestMethod.GET,produces=MediaType.IMAGE_JPEG_VALUE) // DISPLAYS AN IMAGE - ID
 	@CrossOrigin(origins = "http://localhost:8081")

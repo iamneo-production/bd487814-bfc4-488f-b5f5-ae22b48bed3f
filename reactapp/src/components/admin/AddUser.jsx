@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function AddUser() {
   const { darkMode } = useContext(DarkModeContext);
-  if ((sessionStorage.getItem("token"))) {
+  if (!(sessionStorage.getItem("token"))) {
     return <Navigate to="/login" />;
   }
   return (
