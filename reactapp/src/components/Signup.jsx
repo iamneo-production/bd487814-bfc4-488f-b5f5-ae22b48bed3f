@@ -31,6 +31,11 @@ const Formbox = styled.div`
   scrollbar-width: 0px;
 `;
 
+
+
+
+
+
 // Container to style and hold Form and logo
 const Container = styled.div`
   background-image: url(${bgImg});
@@ -57,6 +62,12 @@ const Signup = () => {
     username: "",
     password: "",
   });
+
+
+
+
+
+
 
   const { email, mobileNumber, username, password } = data;
   const [valid, setValid] = useState(false);
@@ -89,6 +100,7 @@ const Signup = () => {
     //     }
     //   });
     // }
+    
     console.log(data);
     axios.post("http://localhost:8080/signup", data).then((res) => {
       if (res.data.status) {
