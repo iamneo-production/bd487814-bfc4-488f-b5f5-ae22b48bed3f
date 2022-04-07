@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { confirm } from "react-confirm-box";
 import "./image.css";
+import "./profile.js";
 
 export default function Image() {
 
