@@ -43,9 +43,6 @@ export default function Image() {
                     </div>
                 </div>
                 <div className="navigation-icons">
-                    <Link to="#" className="navigation-link">
-                        <i className="far fa-compass" />
-                    </Link>
                     <Link to="/uploadimg" className="navigation-link notifica">
                         <i className="fa fa-plus" aria-hidden="true"/>
                     </Link>
