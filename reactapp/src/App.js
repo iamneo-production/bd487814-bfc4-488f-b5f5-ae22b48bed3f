@@ -26,7 +26,7 @@ function App() {
         <Route path="admin/adduser" element={<AddUser />} />
         <Route path="admin/userEdit/:id" element={<UserEdit />} />
         <Route path="admin/image" element={<Feed />} />
-        <Route path="home" element={<UserFeed />} />
+        <Route path="image" element={<UserFeed />} />
       </Routes>
     </BrowserRouter>
   );
