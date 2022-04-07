@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext  } from "react";
+import React, { useState } from "react";
 import "./Post.css";
 import UserImg from "./user.png";
-import PostImg from "./postimg.jpg";
 import Comments from "./Comments";
 import axios from "axios";
 
@@ -10,21 +9,20 @@ const Post = (props) => {
   const token = sessionStorage.getItem("token");
 
   const deleteImage = () => {
-    axios.delete(`http://localhost:8080/admin/image/${props.imageId}`).then(()=> {
+    axios.delete(`http://localhost:8080/admin/image/${props.imageId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then(()=> {
       window.location.reload()
     })
 
   }
 
-  useEffect(() => {
-    axios.get(`http://localhost:8080/image/${props.imageId}`,{
-      headers: { Authorization: `Bearer ${token}` },
-    }).then(
-      (res) => {
-        console.log(res);
-      }
-    )
-  });
+
+  const EditImage = () => {
+    sessionStorage.setItem("imageId",props.imageId);
+    window.location.href = "/admin/imageEdit";
+
+  }
 
   const loadComments = () => {
     if (comments === true) {
@@ -42,7 +40,7 @@ const Post = (props) => {
             <button onClick={deleteImage}>Delete</button>
           </div>
           <div className="editPost">
-            <button>Edit</button>
+            <button onClick={EditImage}>Edit</button>
           </div>
         </div>
 
@@ -53,7 +51,7 @@ const Post = (props) => {
           <div className="feed__username">{props.username}</div>
         </div>
         <div>
-          <img className="feed__postImg" src={`postimg.jpg`} alt="" />
+          <img className="feed__postImg" src={`http://localhost:8080/image/${props.imageId}`} alt="" />
         </div>
 
         <div className="line"></div>

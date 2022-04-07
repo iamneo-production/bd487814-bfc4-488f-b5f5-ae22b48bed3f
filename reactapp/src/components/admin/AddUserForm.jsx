@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 // eslint-disable-next-line
-import {Navigate } from "react-router-dom";
+import { Link, useLocation, Navigate } from "react-router-dom";
 import "./darkmode/dark.scss";
 import "./AddUserForm.css";
 import { DarkModeContext } from "./darkmode/DarkModeContext";
@@ -12,7 +12,6 @@ export default function AddUserForm(props) {
   const token = sessionStorage.getItem("token");
   const notify = (e) => toast(e);
   const { darkMode } = useContext(DarkModeContext);
-  const [successfull, setSuccessfull] = useState(false);
   const [data, setData] = useState({
     email: "",
     username: "",
@@ -25,9 +24,20 @@ export default function AddUserForm(props) {
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
-
+  // const usePathname = () => {
+  //   const location = useLocation();
+  //   return location.pathname;
+  // };
+  //let currentPath = usePathname();
   const submitHandler = (e) => {
     e.preventDefault();
+    //console.log(data);
+    // if (currentPath === "/admin/userEdit") {
+    //   currentPath = currentPath + "/" + data.email;
+    // } else if (currentPath === "/admin") {
+    //   currentPath = currentPath + "/adduser";
+    // }
+    //notify(currentPath);
     axios
       .post("http://localhost:8080/admin/adduser", data, {
         headers: { Authorization: `Bearer ${token}` },
@@ -35,15 +45,13 @@ export default function AddUserForm(props) {
       .then((res) => {
         if (res.data) {
           notify("New User Added Successfully");
-          setSuccessfull(true);
+          window.location.reload();
         } else {
           notify("Username/Email Id already exists");
         }
       });
   };
-if(successfull){
-  return <Navigate to="/admin" />; 
-};
+
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <div className="newUser">
