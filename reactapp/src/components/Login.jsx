@@ -48,8 +48,9 @@ const Formlogo = styled.div`
 `;
 
 //Save the token from the response
-export function saveresp(res) {
+export function saveresp(res,email) {
   sessionStorage.setItem("token",res.data.token);
+  sessionStorage.setItem("userEmail",email);
 }
 
 const Login = () => {
@@ -104,10 +105,10 @@ const Login = () => {
     //   });
     // }
 
-    console.log(data);
+   // console.log(data);
     axios.post("http://localhost:8080/login", data).then((res) => {
       if (res.data.status) {
-        saveresp(res);
+        saveresp(res,data.email);
         if (res.data.role === "ROLE_ADMIN") {
           setAuthadmin(true);
         } else {
@@ -123,7 +124,7 @@ const Login = () => {
     return <Navigate to="/admin" />;
   }
   if (authuser) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/image" />;
   }
 
   return (

@@ -1,4 +1,4 @@
-import "./Navbar.scss";
+import "./UserNavbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -38,7 +38,7 @@ function Navbar() {
             onClick={() => dispatch({ type: "TOGGLE" })}
           />
         </div>
-        <Link to="/admin"><Button
+        <Link to="/image"><Button
           className="navbutton"
           variant="outlined"
           style={{
@@ -51,7 +51,7 @@ function Navbar() {
         >
           HOME
         </Button></Link>
-        <Link to="/admin/image">
+        <Link to="/image/add">
         <Button
           className="navbutton"
           variant="outlined"
@@ -63,21 +63,7 @@ function Navbar() {
             size: "large",
           }}
         >
-          IMAGES
-        </Button>
-        </Link>
-        <Link to="/admin/comment"><Button
-          className="navbutton"
-          variant="outlined"
-          style={{
-            color: "#777",
-            border: "2px solid #777",
-            padding: "5px 25px",
-            fontSize: "15px",
-            size: "large",
-          }}
-        >
-          COMMENTS
+          ADD IMAGE
         </Button>
         </Link>
         <div className="item">

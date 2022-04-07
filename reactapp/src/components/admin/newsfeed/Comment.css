@@ -1,0 +1,31 @@
+.comment {
+    display: flex;
+    padding:10px;
+    font-size: 14px;
+
+}
+
+.comment__userImg > img{
+    width:40px;
+    height:40px;
+    border-radius: 50%;
+
+}
+
+.comment__userImg {
+    margin: 0 5px;
+}
+
+.comment__text {
+    background-color: rgb(242, 242, 242);
+    flex: auto;
+    border-radius: 0 6px 6px 6px;
+    padding: 8px;
+}
+
+.comment__username {
+    color: #000000E6;
+    font-weight: 600;
+
+}
+

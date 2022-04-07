@@ -46,15 +46,13 @@ export default function AddUserForm(props) {
       .then((res) => {
         if (res.data) {
           notify("New User Added Successfully");
-          setSuccessfull(true);
+          window.location.reload();
         } else {
           notify("Username/Email Id already exists");
         }
       });
   };
-if(successfull){
-  return <Navigate to="/admin" />; 
-};
+
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <div className="newUser">
