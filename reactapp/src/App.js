@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Admin from "./components/admin/Admin";
+import Feed from "./components/admin/newsfeed/Feed";
 import Home from "./components/Home";
 import AddUser from "./components/admin/AddUser";
 import UserEdit from "./components/admin/UserEdit";
@@ -23,6 +24,7 @@ function App() {
         <Route exact path="uploadimg" element={<ImageUpload />} />
         <Route path="admin/adduser" element={<AddUser />} />
         <Route path="admin/userEdit/:id" element={<UserEdit />} />
+        <Route path="admin/image" element={<Feed />} />
       </Routes>
     </BrowserRouter>
   );

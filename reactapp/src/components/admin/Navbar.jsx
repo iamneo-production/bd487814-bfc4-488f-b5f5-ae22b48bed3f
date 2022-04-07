@@ -53,7 +53,7 @@ function Navbar() {
           HOME
         </Button>
         <Button
-          href="admin/images"
+          href="admin/image"
           className="navbutton"
           variant="outlined"
           style={{
