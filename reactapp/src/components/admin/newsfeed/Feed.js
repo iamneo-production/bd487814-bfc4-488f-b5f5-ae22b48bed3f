@@ -2,14 +2,16 @@ import React, {useState, useEffect, useContext } from "react";
 import "./Post.css";
 import Post from './Post';
 import axios from 'axios';
-import "../darkmode/dark.scss"
+import "../darkmode/dark.scss";
 import { DarkModeContext } from "../darkmode/DarkModeContext";
 import Navbar from "../Navbar";
+import {Navigate} from "react-router-dom";
 
 const Feed = () => {
-  const { darkMode } = useContext(DarkModeContext);
+
   const token = sessionStorage.getItem("token");
   const [data,setData] = useState([]);
+  const { darkMode } = useContext(DarkModeContext);
   
 
   useEffect(() => {
@@ -17,16 +19,29 @@ const Feed = () => {
       headers: { Authorization: `Bearer ${token}` },
     }).then(
       (res) => {
+
+        var i;
+        for (i = 0; i < res.data.length; i++) 
+        {
+          res.data[i]["id"] = i;
+        }
+
+        //console.log(res.data);
+
         setData(res.data);
       }
     )
-  });
+  },[]);
 
-  
+  //console.log(data);
+
+  if (!(sessionStorage.getItem("token"))) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <Navbar />
-    <div>
       <div className="main">
         {
           data.map(
@@ -40,7 +55,6 @@ const Feed = () => {
           )
         }
       </div>
-    </div>
     </div>
   );
 };
