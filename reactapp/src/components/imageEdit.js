@@ -6,6 +6,7 @@ import axios from "axios";
 import "./admin/darkmode/dark.scss";
 import { DarkModeContext } from "./admin/darkmode/DarkModeContext";
 import Navbar from "./admin/Navbar";
+import { Navigate } from "react-router-dom";
 
 function ImageUpload() {
   const notify = (e) => toast(e);

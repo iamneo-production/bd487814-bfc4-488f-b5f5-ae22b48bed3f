@@ -1,13 +1,13 @@
-import "../admin/Navbar.scss";
+import "./UserNavbar.scss";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { DarkModeContext } from "../admin/darkmode/DarkModeContext";
+import { DarkModeContext } from "./darkmode/DarkModeContext";
 import { Button } from "@mui/material";
 
-function Navbaruser() {
+function Navbar() {
   const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="navbar">
@@ -38,20 +38,33 @@ function Navbaruser() {
             onClick={() => dispatch({ type: "TOGGLE" })}
           />
         </div>
-        <Link to="add">
-          <Button
-            className="navbutton"
-            variant="outlined"
-            style={{
-              color: "#777",
-              border: "2px solid #777",
-              padding: "5px 25px",
-              fontSize: "15px",
-              size: "large",
-            }}
-          >
-            Insert
-          </Button>
+        <Link to="/image"><Button
+          className="navbutton"
+          variant="outlined"
+          style={{
+            color: "#777",
+            border: "2px solid #777",
+            padding: "5px 25px",
+            fontSize: "15px",
+            size: "large",
+          }}
+        >
+          HOME
+        </Button></Link>
+        <Link to="/image/add">
+        <Button
+          className="navbutton"
+          variant="outlined"
+          style={{
+            color: "#777",
+            border: "2px solid #777",
+            padding: "5px 25px",
+            fontSize: "15px",
+            size: "large",
+          }}
+        >
+          ADD IMAGE
+        </Button>
         </Link>
         <div className="item">
           <Link to="/login">
@@ -68,4 +81,4 @@ function Navbaruser() {
   );
 }
 
-export default Navbaruser;
+export default Navbar;

@@ -37,10 +37,8 @@ function ImageUpload() {
       notify("Image Uploaded");
       window.location.href = "/image";
     });
-    if (!sessionStorage.getItem("token")) {
-      return <Navigate to="/login" />;
-    }
   };
+
   if (!sessionStorage.getItem("token")) {
     return <Navigate to="/login" />;
   }

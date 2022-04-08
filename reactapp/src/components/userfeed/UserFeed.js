@@ -3,7 +3,7 @@ import "../admin/newsfeed/Post.css";
 import UserPost from "./UserPost";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
-import Navbaruser from "./Navbaruser";
+import UserNavbar from "./UserNavbar";
 import { DarkModeContext } from "../admin/darkmode/DarkModeContext";
 
 const UserFeed = () => {
@@ -25,7 +25,7 @@ const UserFeed = () => {
   }
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      <Navbaruser />
+      <UserNavbar />
       <div>
         <div className="main">
           {data.map((item) => (
