@@ -38,48 +38,51 @@ function Navbar() {
             onClick={() => dispatch({ type: "TOGGLE" })}
           />
         </div>
-        <Button
-          href="admin"
-          className="navbutton"
-          variant="outlined"
-          style={{
-            color: "#777",
-            border: "2px solid #777",
-            padding: "5px 25px",
-            fontSize: "15px",
-            size: "large",
-          }}
-        >
-          HOME
-        </Button>
-        <Button
-          href="admin/image"
-          className="navbutton"
-          variant="outlined"
-          style={{
-            color: "#777",
-            border: "2px solid #777",
-            padding: "5px 25px",
-            fontSize: "15px",
-            size: "large",
-          }}
-        >
-          /IMAGES
-        </Button>
-        <Button
-          href="admin/comment"
-          className="navbutton"
-          variant="outlined"
-          style={{
-            color: "#777",
-            border: "2px solid #777",
-            padding: "5px 25px",
-            fontSize: "15px",
-            size: "large",
-          }}
-        >
-          /COMMENTS
-        </Button>
+        <Link to="/admin">
+          <Button
+            className="navbutton"
+            variant="outlined"
+            style={{
+              color: "#777",
+              border: "2px solid #777",
+              padding: "5px 25px",
+              fontSize: "15px",
+              size: "large",
+            }}
+          >
+            HOME
+          </Button>
+        </Link>
+        <Link to="/admin/image">
+          <Button
+            className="navbutton"
+            variant="outlined"
+            style={{
+              color: "#777",
+              border: "2px solid #777",
+              padding: "5px 25px",
+              fontSize: "15px",
+              size: "large",
+            }}
+          >
+            IMAGES
+          </Button>
+        </Link>
+        <Link to="/admin/comment">
+          <Button
+            className="navbutton"
+            variant="outlined"
+            style={{
+              color: "#777",
+              border: "2px solid #777",
+              padding: "5px 25px",
+              fontSize: "15px",
+              size: "large",
+            }}
+          >
+            COMMENTS
+          </Button>
+        </Link>
         <div className="item">
           <Link to="/login">
             <ExitToAppIcon
