@@ -21,6 +21,7 @@
 
     .search {
       border-color: gray;
+
       input {
         border: none;
         outline: none;
@@ -40,7 +41,7 @@
       border: none;
 
       .viewButton,
-      .deleteButton{
+      .deleteButton {
         color: gray;
         border: 1px dotted rgba(255, 255, 255, 0);
         border-color: gray;

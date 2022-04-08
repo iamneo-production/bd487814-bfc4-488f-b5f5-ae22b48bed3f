@@ -9,20 +9,19 @@ const Post = (props) => {
   const token = sessionStorage.getItem("token");
 
   const deleteImage = () => {
-    axios.delete(`http://localhost:8080/admin/image/${props.imageId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    }).then(()=> {
-      window.location.reload()
-    })
-
-  }
-
+    axios
+      .delete(`http://localhost:8080/admin/image/${props.imageId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        window.location.reload();
+      });
+  };
 
   const EditImage = () => {
-    sessionStorage.setItem("imageId",props.imageId);
+    sessionStorage.setItem("imageId", props.imageId);
     window.location.href = "/admin/imageEdit";
-
-  }
+  };
 
   const loadComments = () => {
     if (comments === true) {
@@ -51,7 +50,11 @@ const Post = (props) => {
           <div className="feed__username">{props.username}</div>
         </div>
         <div>
-          <img className="feed__postImg" src={`http://localhost:8080/image/${props.imageId}`} alt="" />
+          <img
+            className="feed__postImg"
+            src={`http://localhost:8080/image/${props.imageId}`}
+            alt=""
+          />
         </div>
 
         <div className="line"></div>

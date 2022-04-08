@@ -1,94 +1,95 @@
 body {
-    background-color: rgb(243, 242, 239);
+  background-color: rgb(243, 242, 239);
 }
 
 .main {
-    width: 40%;
-    margin: 0 auto;
+  width: 40%;
+  margin: 0 auto;
 }
 
 .main__feed {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(231, 230, 227);
-    border-radius: 7px;
-    margin: 8px 0;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(231, 230, 227);
+  border-radius: 7px;
+  margin: 8px 0;
 }
 
 .feed__user {
-    display: flex;
-    padding: 12px 16px 0;
-    margin-bottom: 6px;
+  display: flex;
+  padding: 12px 16px 0;
+  margin-bottom: 6px;
 }
 
 .feed__userImg {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
 }
 
 .feed__username {
-    color: #000000E6;
-    font-weight: 600;
-    margin: 5px 10px;
-    font-size: 14px;
+  color: #000000e6;
+  font-weight: 600;
+  margin: 5px 10px;
+  font-size: 14px;
 }
 
 .feed__postImg {
-    width: 100%;
+  width: 100%;
 }
 
 .feed__insights {
-    padding: 10px 50px;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    color: #00000099;
+  padding: 10px 50px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  color: #00000099;
 }
 
 .line {
-   background-color: rgb(236, 236, 236);
-   height:1px;
-   margin:8px 16px;
-   border-radius: 3px;
+  background-color: rgb(236, 236, 236);
+  height: 1px;
+  margin: 8px 16px;
+  border-radius: 3px;
 }
 
 .feed__btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #feed__comments {
-    display: none;
+  display: none;
 }
 
 .a1 {
-    display: block;
+  display: block;
 }
 
-.deletePost, .editPost {
-    padding: 8px 8px;
+.deletePost,
+.editPost {
+  padding: 8px 8px;
 }
 
 .deletePost > button {
-    background-color: rgb(255, 80, 80);
-    font-size: 14px;
-    color:white;
-    padding:4px;
-    border:none;
-    border-radius: 2px;
+  background-color: rgb(255, 80, 80);
+  font-size: 14px;
+  color: white;
+  padding: 4px;
+  border: none;
+  border-radius: 2px;
 }
 .deletePost > button:hover {
-    cursor:pointer;
+  cursor: pointer;
 }
 .editPost > button {
-    background-color: rgb(35, 141, 255);
-    font-size: 14px;
-    color:white;
-    padding:4px;
-    border:none;
-    border-radius: 2px;
+  background-color: rgb(35, 141, 255);
+  font-size: 14px;
+  color: white;
+  padding: 4px;
+  border: none;
+  border-radius: 2px;
 }
 
 .controls {
-    display:flex;
-    justify-content:flex-end;
+  display: flex;
+  justify-content: flex-end;
 }
