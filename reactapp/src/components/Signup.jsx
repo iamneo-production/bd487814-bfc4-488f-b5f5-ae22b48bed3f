@@ -89,22 +89,19 @@ const Signup = () => {
     //     }
     //   });
     // }
-    console.log(data);
+    // console.log(data);
     axios.post("http://localhost:8080/signup", data).then((res) => {
       if (res.data.status) {
         setValid(true);
-      }
-      else
-      {
+      } else {
         notify("Registration unsuccessful");
       }
-  });
-  }
+    });
+  };
   if (valid) {
     return <Navigate to="/login" />;
   }
 
-  
   return (
     <div id="signupBox">
       <Container>

@@ -13,7 +13,6 @@ function ImageUpload() {
   const imageId = sessionStorage.getItem("imageId");
   const token = sessionStorage.getItem("token");
   const { darkMode } = useContext(DarkModeContext);
-
   const [Pictures, setPictures] = useState();
 
   function onDrop(pictureFiles, pictureDataURLs) {
@@ -22,18 +21,13 @@ function ImageUpload() {
 
   const handleClick = (e) => {
     e.preventDefault();
-
     if (Pictures == null) {
       window.alert("No Image Uploaded");
       window.location.reload();
     }
-
     let fd = new FormData();
-
     fd.append("image", Pictures);
-
-    console.log(imageId);
-
+    // console.log(imageId);
     axios
       .put(`http://localhost:8080/admin/imageEdit/${imageId}`, fd, {
         headers: { Authorization: `Bearer ${token}` },
@@ -44,6 +38,9 @@ function ImageUpload() {
         window.location.href = "/admin/image";
       });
   };
+  if (!sessionStorage.getItem("token")) {
+    return <Navigate to="/login" />;
+  }
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <Navbar />
