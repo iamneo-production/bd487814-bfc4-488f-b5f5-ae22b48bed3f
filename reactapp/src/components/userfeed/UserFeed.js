@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../admin/newsfeed/Post.css";
 import UserPost from "./UserPost";
 import axios from "axios";
@@ -20,7 +20,7 @@ const UserFeed = () => {
       });
   });
 
-  if ((sessionStorage.getItem("token"))) {
+  if (!sessionStorage.getItem("token")) {
     return <Navigate to="/login" />;
   }
   return (

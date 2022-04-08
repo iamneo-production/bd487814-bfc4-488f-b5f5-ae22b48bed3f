@@ -39,19 +39,19 @@ function Navbaruser() {
           />
         </div>
         <Link to="add">
-        <Button
-          className="navbutton"
-          variant="outlined"
-          style={{
-            color: "#777",
-            border: "2px solid #777",
-            padding: "5px 25px",
-            fontSize: "15px",
-            size: "large",
-          }}
-        >
-         Insert
-        </Button>
+          <Button
+            className="navbutton"
+            variant="outlined"
+            style={{
+              color: "#777",
+              border: "2px solid #777",
+              padding: "5px 25px",
+              fontSize: "15px",
+              size: "large",
+            }}
+          >
+            Insert
+          </Button>
         </Link>
         <div className="item">
           <Link to="/login">

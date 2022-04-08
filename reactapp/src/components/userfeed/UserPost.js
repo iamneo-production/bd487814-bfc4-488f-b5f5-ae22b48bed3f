@@ -3,12 +3,11 @@ import "../admin/newsfeed/Post.css";
 import UserImg from "../admin/newsfeed/user.png";
 import PostImg from "../admin/newsfeed/postimg.jpg";
 import Comments from "../admin/newsfeed/Comments";
-import axios from 'axios';
+import axios from "axios";
 import AddComment from "./AddComment";
 
 const UserPost = (props) => {
   const [comments, setComments] = useState(false);
-  
 
   const loadComments = () => {
     if (comments === true) {
@@ -21,7 +20,6 @@ const UserPost = (props) => {
   return (
     <>
       <div className="main__feed">
-
         <div className="feed__user">
           <div>
             <img className="feed__userImg" src={UserImg} alt="" />
@@ -88,7 +86,7 @@ const UserPost = (props) => {
         </div>
 
         <div style={{ display: comments ? "block" : "none" }}>
-            <AddComment imageId = {props.imageId} />
+          <AddComment imageId={props.imageId} />
           <Comments comments={props.comments} />
         </div>
       </div>
