@@ -42,16 +42,8 @@ public class ImageController {
 			
 		}
 		
-		catch (SerialException e) {
-			e.printStackTrace();
-		}
-		
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		catch (IOException e) {
-			e.printStackTrace();
+		catch (Exception e) {
+			System.out.println("ENCOUNTERED AN EXCEPTION");
 		}
 		
 	}
@@ -84,16 +76,7 @@ public class ImageController {
 		
 		catch (Exception e) {
 			System.out.println("ENCOUNTERED AN EXCEPTION");
-			//e.printStackTrace();
 		}
-		
-		/*catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		catch (IOException e) {
-			e.printStackTrace();
-		}*/
 		
 	}
 	
@@ -104,13 +87,9 @@ public class ImageController {
 		
 	}*/
 	
-	@RequestMapping(value="/image/{id}",method=RequestMethod.GET,produces=MediaType.IMAGE_JPEG_VALUE) // DISPLAYS AN IMAGE - ID
+	@RequestMapping(value={"/image/{id}","/admin/image/{id}"},method=RequestMethod.GET,produces=MediaType.IMAGE_JPEG_VALUE) // DISPLAYS AN IMAGE - ID
 	@CrossOrigin(origins = "http://localhost:8081")
 	public byte[] showImage(@PathVariable String id) {
-		/*byte[] buffer = imgService.showImage(id);
-		
-		return buffer;*/
-		
 		try {
 			byte[] buffer = imgService.showImage(id).getImage().getBinaryStream().readAllBytes();
 			
@@ -119,7 +98,6 @@ public class ImageController {
 		
 		catch (Exception e) {
 			System.out.println("ENCOUNTERED AN EXCEPTION");
-			//e.printStackTrace();
 		}
 		
 		return null;
@@ -133,7 +111,7 @@ public class ImageController {
 		
 	}
 	
-	@RequestMapping(value="/user/{id}",method=RequestMethod.GET) // USED TO DISPLAY IMAGE ID, USERMODEL, COMMENTS OF POST BY PARTICULAR USER
+	@RequestMapping(value="/image/user/{id}",method=RequestMethod.GET) // USED TO DISPLAY IMAGE ID, USERMODEL, COMMENTS OF POST BY PARTICULAR USER
 	@CrossOrigin(origins = "http://localhost:8081")
 	public List<ImageModel> getImagesByUser(@PathVariable String id) {
 		return imgService.getImagesByUser(id);

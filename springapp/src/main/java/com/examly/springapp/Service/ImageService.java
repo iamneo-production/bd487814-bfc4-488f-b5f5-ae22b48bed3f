@@ -23,6 +23,7 @@ import com.examly.springapp.Model.ImageModel;
 import com.examly.springapp.Model.UserModel;
 import com.examly.springapp.Repository.CommentRepository;
 import com.examly.springapp.Repository.ImageRepository;
+import com.examly.springapp.Repository.UserRepository;
 
 @Service
 @Transactional
@@ -31,7 +32,11 @@ public class ImageService {
 	@Autowired
 	private ImageRepository imageRepo; 
 	
-	@Autowired CommentRepository commentRepo;
+	@Autowired 
+	private CommentRepository commentRepo;
+	
+	@Autowired 
+	private UserRepository userRepo;
 	
 	public void addImage(String name, Blob image, String tag, String email) {
 		ImageModel img=new ImageModel(name,image,tag,new UserModel(email));
@@ -86,15 +91,39 @@ public class ImageService {
 				
 				temp1.setCommentId(commentRepo.findById(temp.get(j).getCommentId()).get().getCommentId());
 				temp1.setComment(commentRepo.findById(temp.get(j).getCommentId()).get().getComment());
-				temp1.setUserId(new UserModel(commentRepo.findById(temp.get(j).getCommentId()).get().getUserId().getEmail()));
-
+				
+				UserModel tempUserModel = new UserModel();
+				
+				for(UserModel k:userRepo.findAll())
+				{
+					if((k.getEmail().equals(commentRepo.findById(temp.get(j).getCommentId()).get().getUserId().getEmail())))
+					{
+						tempUserModel.setEmail(i.getUserId().getEmail());
+						tempUserModel.setUsername(k.getUsername());
+						break;
+					}
+				}
+				
+				temp1.setUserId(tempUserModel);
+				
 				tempNew.add(temp1);
 				
 			}
 			
+			UserModel tempUserModel = new UserModel();
+			
+			for(UserModel k:userRepo.findAll())
+			{
+				if((k.getEmail().equals(i.getUserId().getEmail())))
+				{
+					tempUserModel.setEmail(i.getUserId().getEmail());
+					tempUserModel.setUsername(k.getUsername());
+					break;
+				}
+			}
 			
 			
-			images.add(new ImageModel(i.getImageId(),i.getImageName(),i.getImageTag(),new UserModel(i.getUserId().getEmail()),tempNew));
+			images.add(new ImageModel(i.getImageId(),i.getImageName(),i.getImageTag(),tempUserModel,tempNew));
 		}
 		
 		return images;
@@ -119,7 +148,20 @@ public class ImageService {
 					
 					temp1.setCommentId(commentRepo.findById(temp.get(j).getCommentId()).get().getCommentId());
 					temp1.setComment(commentRepo.findById(temp.get(j).getCommentId()).get().getComment());
-					temp1.setUserId(new UserModel(commentRepo.findById(temp.get(j).getCommentId()).get().getUserId().getEmail()));
+					
+					UserModel tempUserModel = new UserModel();
+					
+					for(UserModel k:userRepo.findAll())
+					{
+						if((k.getEmail().equals(commentRepo.findById(temp.get(j).getCommentId()).get().getUserId().getEmail())))
+						{
+							tempUserModel.setEmail(i.getUserId().getEmail());
+							tempUserModel.setUsername(k.getUsername());
+							break;
+						}
+					}
+					
+					temp1.setUserId(tempUserModel);
 	
 					tempNew.add(temp1);
 					
@@ -127,7 +169,20 @@ public class ImageService {
 				
 				
 				
-				images.add(new ImageModel(i.getImageId(),i.getImageName(),i.getImageTag(),new UserModel(i.getUserId().getEmail()),tempNew));
+				UserModel tempUserModel = new UserModel();
+				
+				for(UserModel k:userRepo.findAll())
+				{
+					if((k.getEmail().equals(i.getUserId().getEmail())))
+					{
+						tempUserModel.setEmail(i.getUserId().getEmail());
+						tempUserModel.setUsername(k.getUsername());
+						break;
+					}
+				}
+				
+				
+				images.add(new ImageModel(i.getImageId(),i.getImageName(),i.getImageTag(),tempUserModel,tempNew));
 			
 			}
 		}

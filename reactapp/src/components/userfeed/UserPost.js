@@ -27,7 +27,11 @@ const UserPost = (props) => {
           <div className="feed__username">{props.username}</div>
         </div>
         <div>
-          <img className="feed__postImg" src={PostImg} alt="" />
+          <img
+            className="feed__postImg"
+            src={`http://localhost:8080/image/${props.imageId}`}
+            alt=""
+          />
         </div>
 
         <div className="line"></div>

@@ -17,22 +17,25 @@ export default function UserEditForm(props) {
     username: "",
     mobileNumber: "",
     password: "",
+    role: ""
   });
   const { email, username, mobileNumber, password } = data;
   useEffect(() => {
     const url = window.location.href;
     const lastSegment = url.substring(url.lastIndexOf("/") + 1);
+    console.log(lastSegment);
     axios
-      .get("http://localhost:8080/admin/userEdit/" + lastSegment, {
+      .get("http://localhost:8080/admin/user/" + lastSegment, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        if (res.data.status) {
+        if (res.data) {
           setData({
             email: res.data.email,
             username: res.data.username,
             mobileNumber: res.data.mobileNumber,
             password: "",
+            role: res.data.role
           });
         } else {
           window.alert("User doesn't exist");
@@ -47,16 +50,17 @@ export default function UserEditForm(props) {
   };
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(data);
     axios
       .put("http://localhost:8080/admin/userEdit/" + data.email, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         if (res.data) {
-          notify("User details are succefully updated");
+          notify("User details are successfully updated");
           setSuccessfull(true);
         } else {
-          notify("User details are not updated");
+          notify("Username already exists");
         }
       });
   };

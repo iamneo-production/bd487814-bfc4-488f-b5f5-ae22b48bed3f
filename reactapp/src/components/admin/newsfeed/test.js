@@ -1,4 +1,4 @@
-export const data = [
+/*export const data = [
     {
         "imageId": "a75aa830-fae3-49fa-937b-b2b50ceebb2b",
         "imageName": "Screenshot 2021-07-14 174006.jpg",
@@ -67,4 +67,4 @@ export const data = [
             }
         ]
     }
-]
+]*/

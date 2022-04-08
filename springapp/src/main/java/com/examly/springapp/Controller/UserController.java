@@ -60,4 +60,11 @@ public class UserController {
 		}
 	}
 	
+	
+	@RequestMapping(value="/admin/user/{id}",method=RequestMethod.GET)
+	@CrossOrigin(origins = "http://localhost:8081")
+	public UserModel getUserDetails(@PathVariable String id) { // ADMIN HAS THE PRIVILGE TO EDIT USER DETAILS
+		return userService.getUserDetails(id);
+	}
+	
 }

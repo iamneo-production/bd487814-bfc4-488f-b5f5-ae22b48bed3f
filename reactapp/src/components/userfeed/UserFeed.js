@@ -4,6 +4,7 @@ import UserPost from "./UserPost";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import UserNavbar from "./UserNavbar";
+import "./darkmode/dark.scss";
 import { DarkModeContext } from "../admin/darkmode/DarkModeContext";
 
 const UserFeed = () => {

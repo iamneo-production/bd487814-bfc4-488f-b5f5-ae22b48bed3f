@@ -58,6 +58,7 @@ export default function Image() {
                 </div>
             </div>
             <hr></hr>
+            <Header/>
         </div>
         
     );
