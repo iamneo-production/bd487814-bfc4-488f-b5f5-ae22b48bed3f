@@ -16,13 +16,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path={"*"} element={<Notfound />} />
         <Route path={"/"} element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
         <Route path="admin" element={<Admin />} />
-        {/* <Route path="home" element={<Home />} /> */}
-        {/* <Route exact path="image" element={<Image />} /> */}
-        <Route exact path="uploadimg" element={<ImageUpload />} />
+        <Route exact path="image/add" element={<ImageAdd />} />
+        <Route exact path="admin/imageEdit" element={<ImageEdit />} />
         <Route path="admin/adduser" element={<AddUser />} />
         <Route path="admin/userEdit/:id" element={<UserEdit />} />
         <Route path="admin/image" element={<Feed />} />
