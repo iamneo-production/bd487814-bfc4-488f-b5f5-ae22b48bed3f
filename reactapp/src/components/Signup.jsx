@@ -66,30 +66,9 @@ const Signup = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // if (password.toString().length <= 8) {
-    //   alert(`Password must contain atleast 8 characters.`);
-    // } else if (
-    //   password.search(/[0-9]/) === -1 ||
-    //   password.search(/[a-z]/) === -1 ||
-    //   password.search(/[A-Z]/) === -1 ||
-    //   password.search(
-    //     /[!\@\#\$\^\&\*\(\)\+\=\-\/\?\.\,\>\<\}\{\]\[\'\"\;\:\]\}\{\`\~]/
-    //   ) === -1
-    // ) {
-    //   alert(
-    //     `Password must contain atleast 1 number, 1 Uppercase, 1 Lowercase and 1 Special character.`
-    //   );
-    // } else {
-    //   console.log(data);
-    //   axios.post("http://localhost:8081/signup", data).then((res) => {
-    //     notify("Registered Successfully!");
-    //     // res =>{auth=true}
-    //     if (res) {
-    //       setValid(true);
-    //     }
-    //   });
-    // }
-    // console.log(data);
+   
+  
+    
     axios.post("http://localhost:8080/signup", data).then((res) => {
       if (res.data) {
         setValid(true);
@@ -153,28 +132,7 @@ const Signup = () => {
                 required
               />
             </FormGroup>
-            {/* <FormGroup>
-          <Label>Email ID</Label>
-          <Input
-            type="email"
-            id="email"
-            placeholder="Enter email id"
-            value={email}
-            onChange={(e) => setemail(e.target.value)}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label>Mobile number</Label>
-          <Input
-            type="number"
-            id="mobileNumber"
-            placeholder="Enter mobile number"
-            value={mobileNumber}
-            onChange={(e) => setmobileNumber(e.target.value)}
-            required
-          />
-        </FormGroup> */}
+            {}
             <FormGroup>
               <Label>Password</Label>
               <Input
